@@ -1,6 +1,6 @@
-# Astro Starter Kit: Portfolio
+# Saleh's Astro site.
 
-Hi, welcome to my Astro site repo. The site is a static site that I host on Railway.
+Hi, welcome to my Astro site repo. The site is a static site that I host on Railway. This is based off the Astro Starter kit for a Portfolio.
 
 ## 🧞 Commands
 
