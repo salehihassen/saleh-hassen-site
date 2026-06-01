@@ -1,0 +1,82 @@
+---
+import "../styles/global.css";
+
+interface Props {
+    title?: string | undefined;
+    description?: string | undefined;
+}
+
+const {
+    title = "Saleh Hassen's site",
+    description = "Portfolio, blog, and other things in my small corner of the internet.",
+} = Astro.props;
+---
+
+<meta charset="UTF-8" />
+<meta name="description" property="og:description" content={description} />
+<meta name="viewport" content="width=device-width" />
+<meta name="generator" content={Astro.generator} />
+<title>{title}</title>
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+    href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,700;1,400&family=Rubik:wght@500;600&display=swap"
+    rel="stylesheet"
+/>
+<script is:inline>
+    const THEME_KEY = "theme";
+
+    // Retrieve saved user theme or null
+    const getStoredTheme = () => {
+        if (typeof localStorage !== "undefined") {
+            return localStorage.getItem(THEME_KEY);
+        }
+        return null;
+    };
+
+    // Determine initial theme based on saved preference or system preference
+    const applyTheme = (theme) => {
+        const isDark = theme === "dark";
+        document.documentElement.classList[isDark ? "add" : "remove"](
+            "theme-dark",
+        );
+    };
+
+    // Initialize theme on page load
+    const storedTheme = getStoredTheme();
+    const systemPrefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)",
+    ).matches;
+
+    if (storedTheme) {
+        applyTheme(storedTheme);
+    } else {
+        applyTheme(systemPrefersDark ? "dark" : "light");
+    }
+
+    // Listen for system theme changes and update theme only if no user preference
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    mediaQuery.addEventListener("change", (e) => {
+        const newSystemPrefersDark = e.matches;
+        const currentStoredTheme = getStoredTheme();
+        // Only update theme if user has not set a preference
+        // if (!currentStoredTheme) {
+        applyTheme(newSystemPrefersDark ? "dark" : "light");
+        // }
+    });
+
+    // Persist user preference when documentElement classes change
+    if (typeof localStorage !== "undefined") {
+        const observer = new MutationObserver(() => {
+            const isDark =
+                document.documentElement.classList.contains("theme-dark");
+            localStorage.setItem(THEME_KEY, isDark ? "dark" : "light");
+        });
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ["class"],
+        });
+    }
+</script>
