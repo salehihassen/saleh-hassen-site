@@ -6,9 +6,6 @@ on:
   pull_request:
   merge_group:
   workflow_dispatch:
-  schedule:
-    # Re-check the repository and dependency ecosystem every Monday morning.
-    - cron: "17 8 * * 1"
 
 permissions:
   contents: read
