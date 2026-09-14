@@ -1,261 +1,100 @@
 ---
 import { getCollection } from "astro:content";
-// Component Imports
-import CallToAction from "../components/CallToAction.astro";
-// Page section components
+
 import ContactCTA from "../components/ContactCTA.astro";
-import Grid from "../components/Grid.astro";
+import EntryRow from "../components/EntryRow.astro";
 import Hero from "../components/Hero.astro";
 import Icon from "../components/Icon.astro";
 import Pill from "../components/Pill.astro";
-import PortfolioPreview from "../components/PortfolioPreview.astro";
+import SectionHeader from "../components/SectionHeader.astro";
 import Skills from "../components/Skills.astro";
-import portrait from "../resources/portrait.jpg";
-// Layout import — provides basic page elements: <head>, <nav>, <footer> etc.
 import BaseLayout from "../layouts/BaseLayout.astro";
+import portrait from "../resources/portrait.jpg";
 
-// Content Fetching: List four most recent work projects
 const projects = (await getCollection("work"))
     .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
     .slice(0, 4);
 
-// Full Astro Component Syntax:
-// https://docs.astro.build/basics/astro-components/
+const posts = (await getCollection("blog"))
+    .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+    .slice(0, 3);
 ---
 
 <BaseLayout>
-    <div class="stack gap-20 lg:gap-48">
-        <div class="wrapper stack gap-8 lg:gap-20">
-            <header class="hero">
+    <section class="mx-auto w-full max-w-5xl px-6 pb-20 pt-14 sm:pt-20">
+        <div
+            class="grid items-center gap-10 sm:grid-cols-[1fr_0.72fr] sm:gap-10 md:gap-14"
+        >
+            <div class="deal-in" style="--deal-index: 0">
                 <Hero
                     title="Hi, I'm Saleh"
                     tagline="I'm a Software Engineer based in Northern Virginia."
-                    align="start"
                 >
-                    <div class="roles">
-                        <Pill
-                            ><Icon icon="code" size="1.33em" />Web Development</Pill
-                        >
-                        <Pill
-                            ><Icon
+                    <div class="flex flex-wrap gap-2 pt-2">
+                        <Pill>
+                            <Icon icon="code" size="1.1em" />Web Development
+                        </Pill>
+                        <Pill>
+                            <Icon
                                 icon="cloud"
-                                size="1.33em"
+                                size="1.1em"
                                 viewBox="0 0 24 24"
                             />Cloud Infrastructure
                         </Pill>
-                        <Pill
-                            ><Icon
+                        <Pill>
+                            <Icon
                                 icon="brain-circuit"
-                                size="1.33em"
+                                size="1.1em"
                                 viewBox="0 0 24 24"
-                            />Applied AI</Pill
-                        >
+                            />Applied AI
+                        </Pill>
                     </div>
                 </Hero>
+            </div>
 
+            <div
+                class="deal-in mx-auto w-full max-w-xs sm:max-w-sm"
+                style="--deal-index: 1"
+            >
                 <img
                     alt="Saleh Hassen smiling in a gray suit while holding an Umbrella."
                     width={portrait.width}
                     height={portrait.height}
                     src={portrait.src}
-                    class="block aspect-[5/4] w-full rounded-[1.5rem] object-cover object-[center_35%] shadow-[var(--shadow-md)] md:aspect-[3/4] md:rounded-[4.5rem]"
+                    class="aspect-[4/5] w-full rounded-[1.5rem] object-cover object-[center_30%] shadow-xl shadow-ink/10 sm:rounded-[2.5rem] lg:rounded-[4.5rem] dark:shadow-black/40"
                 />
-            </header>
+            </div>
+        </div>
+    </section>
 
+    <div class="border-y border-rail bg-surface">
+        <div class="mx-auto w-full max-w-5xl px-6 py-16 sm:py-20">
             <Skills />
         </div>
-
-        <main class="wrapper stack gap-20 lg:gap-48">
-            <section class="section with-background with-cta">
-                <header class="section-header stack gap-2 lg:gap-4">
-                    <h3>Selected Work</h3>
-                    <p>
-                        Here's some of my previous work over the past few years.
-                    </p>
-                </header>
-
-                <div class="gallery">
-                    <Grid variant="offset">
-                        {
-                            projects.map((project) => (
-                                <li>
-                                    <PortfolioPreview project={project} />
-                                </li>
-                            ))
-                        }
-                    </Grid>
-                </div>
-
-                <div class="cta">
-                    <CallToAction href="/work/">
-                        View All
-                        <Icon icon="arrow-right" size="1.2em" />
-                    </CallToAction>
-                </div>
-            </section>
-
-            <!-- <section class="section with-background bg-variant">
-                <header class="section-header stack gap-2 lg:gap-4">
-                    <h3>Mentions</h3>
-                    <p>
-                        I have been fortunate enough to receive praise for my
-                        work in several publications. Take a look below to learn
-                        more.
-                    </p>
-                </header>
-
-                <div class="gallery">
-                    <Grid variant="small">
-                        {
-                            [
-                                "Medium",
-                                "BuzzFeed",
-                                "The Next Web",
-                                "awwwards.",
-                                "TechCrunch",
-                            ].map((brand) => (
-                                <li class="mention-card">
-                                    <p>{brand}</p>
-                                </li>
-                            ))
-                        }
-                    </Grid>
-                </div>
-            </section> -->
-        </main>
-
-        <ContactCTA />
     </div>
+
+    <section class="mx-auto w-full max-w-5xl space-y-6 px-6 py-16 sm:py-20">
+        <SectionHeader
+            title="Selected Work"
+            tagline="Here's some of my previous work over the past few years."
+            href="/work/"
+            linkLabel="View All"
+        />
+        <ul>
+            {
+                projects.map((project) => (
+                    <EntryRow entry={project} base="work" />
+                ))
+            }
+        </ul>
+    </section>
+
+    <section class="mx-auto w-full max-w-5xl space-y-6 px-6 pb-20 sm:pb-24">
+        <SectionHeader title="Blog" href="/blog/" linkLabel="View All" />
+        <ul>
+            {posts.map((post) => <EntryRow entry={post} base="blog" />)}
+        </ul>
+    </section>
+
+    <ContactCTA />
 </BaseLayout>
-
-<style>
-    .hero {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 2rem;
-    }
-
-    .roles {
-        display: none;
-    }
-
-    @media (min-width: 50em) {
-        .hero {
-            display: grid;
-            grid-template-columns: 6fr 4fr;
-            padding-inline: 2.5rem;
-            gap: 3.75rem;
-        }
-
-        .roles {
-            margin-top: 0.5rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-    }
-
-    /* ====================================================== */
-
-    .section {
-        display: grid;
-        gap: 2rem;
-    }
-
-    .with-background {
-        position: relative;
-    }
-
-    .with-background::before {
-        --hero-bg: var(--bg-image-subtle-2);
-
-        content: "";
-        position: absolute;
-        pointer-events: none;
-        left: 50%;
-        width: 100vw;
-        aspect-ratio: calc(2.25 / var(--bg-scale));
-        top: 0;
-        transform: translateY(-75%) translateX(-50%);
-        background:
-            url("/assets/backgrounds/noise.png") top center/220px repeat,
-            var(--hero-bg) center center / var(--bg-gradient-size) no-repeat,
-            var(--gray-999);
-        background-blend-mode: overlay, normal, normal, normal;
-        mix-blend-mode: var(--bg-blend-mode);
-        z-index: -1;
-    }
-
-    .with-background.bg-variant::before {
-        --hero-bg: var(--bg-image-subtle-1);
-    }
-
-    .section-header {
-        justify-self: center;
-        text-align: center;
-        max-width: 50ch;
-        font-size: var(--text-md);
-        color: var(--gray-300);
-    }
-
-    .section-header h3 {
-        font-size: var(--text-2xl);
-    }
-
-    @media (min-width: 50em) {
-        .section {
-            grid-template-columns: repeat(4, 1fr);
-            grid-template-areas: "header header header header" "gallery gallery gallery gallery";
-            gap: 5rem;
-        }
-
-        .section.with-cta {
-            grid-template-areas: "header header header cta" "gallery gallery gallery gallery";
-        }
-
-        .section-header {
-            grid-area: header;
-            font-size: var(--text-lg);
-        }
-
-        .section-header h3 {
-            font-size: var(--text-4xl);
-        }
-
-        .with-cta .section-header {
-            justify-self: flex-start;
-            text-align: left;
-        }
-
-        .gallery {
-            grid-area: gallery;
-        }
-
-        .cta {
-            grid-area: cta;
-        }
-    }
-
-    /* ====================================================== */
-
-    .mention-card {
-        display: flex;
-        height: 7rem;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        border: 1px solid var(--gray-800);
-        border-radius: 1.5rem;
-        color: var(--gray-300);
-        background: var(--gradient-subtle);
-        box-shadow: var(--shadow-sm);
-    }
-
-    @media (min-width: 50em) {
-        .mention-card {
-            border-radius: 1.5rem;
-            height: 9.5rem;
-        }
-    }
-</style>

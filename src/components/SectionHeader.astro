@@ -1,0 +1,39 @@
+---
+import Eyebrow from "./Eyebrow.astro";
+import Icon from "./Icon.astro";
+
+interface Props {
+    title: string;
+    eyebrow?: string;
+    tagline?: string;
+    href?: string;
+    linkLabel?: string;
+}
+
+const { eyebrow, title, tagline, href, linkLabel } = Astro.props;
+---
+
+<div
+    class="flex flex-wrap items-end justify-between gap-x-6 gap-y-3 border-b border-rail pb-4"
+>
+    <div class="space-y-2">
+        {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+        <h2 class="text-display-sm">{title}</h2>
+        {tagline && <p class="max-w-[52ch] text-muted">{tagline}</p>}
+    </div>
+    {
+        href && (
+            <a
+                href={href}
+                class="group inline-flex items-center gap-2 pb-1 font-mono text-meta uppercase tracking-[0.14em] text-accent"
+            >
+                {linkLabel}
+                <Icon
+                    icon="arrow-right"
+                    size="1rem"
+                    class="transition-transform duration-200 group-hover:translate-x-1"
+                />
+            </a>
+        )
+    }
+</div>

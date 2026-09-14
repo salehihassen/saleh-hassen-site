@@ -1,0 +1,58 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Icon from "./Icon.astro";
+import Pill from "./Pill.astro";
+import { formatDate } from "../utils/entry";
+
+interface Props {
+    entry: CollectionEntry<"work"> | CollectionEntry<"blog">;
+    base: "work" | "blog";
+}
+
+const { entry, base } = Astro.props;
+const { data, id } = entry;
+---
+
+<li class="border-t border-rail last:border-b">
+    <a
+        href={`/${base}/${id}`}
+        class="group grid grid-cols-[auto_1fr] items-start gap-x-4 gap-y-3 px-2 py-6 transition-colors duration-200 hover:bg-surface sm:gap-x-6 sm:px-4 md:grid-cols-[5.5rem_1fr_auto] md:items-center"
+    >
+        <img
+            src={data.img.src}
+            width={data.img.width}
+            height={data.img.height}
+            alt={data.img_alt || ""}
+            loading="lazy"
+            decoding="async"
+            class="aspect-[5/4] w-14 rounded-lg sm:rounded-xl border border-rail object-cover opacity-80 saturate-[0.65] transition duration-300 group-hover:opacity-100 group-hover:saturate-100 sm:w-[5.5rem]"
+        />
+
+        <div class="min-w-0 space-y-1.5">
+            <h3
+                class="font-display text-lg font-semibold text-ink transition-colors duration-200 group-hover:text-accent sm:text-xl"
+            >
+                {data.title}
+            </h3>
+            <p class="max-w-[62ch] text-[0.95rem] leading-relaxed text-muted">
+                {data.description}
+            </p>
+            <div class="flex flex-wrap gap-1.5 pt-1">
+                {data.tags.map((tag) => <Pill>{tag}</Pill>)}
+            </div>
+        </div>
+
+        <div
+            class="col-span-2 flex items-center gap-3 font-mono text-meta uppercase tracking-[0.14em] text-faint md:col-span-1 md:justify-end"
+        >
+            <time datetime={data.publishDate.toISOString()}>
+                {formatDate(data.publishDate)}
+            </time>
+            <Icon
+                icon="arrow-right"
+                size="1.1rem"
+                class="text-accent transition-transform duration-200 group-hover:translate-x-1"
+            />
+        </div>
+    </a>
+</li>

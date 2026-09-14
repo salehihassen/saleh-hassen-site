@@ -1,16 +1,18 @@
 ---
-import Hero from '../components/Hero.astro';
-import BaseLayout from '../layouts/BaseLayout.astro';
-
+import Hero from "../components/Hero.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import notFound from "../resources/not_found.jpeg";
 ---
 
 <BaseLayout title="Not Found" description="404 Error — this page was not found">
-	<div class="wrapper stack gap-10 md:gap-12">
-		<Hero title="Page Not Found" tagline="Not found" />
-		<img
-			alt=""
-			class="mx-auto block aspect-[5/4] w-full max-w-md rounded-[1.5rem] object-cover shadow-[var(--shadow-md)] md:aspect-[3/4] md:max-w-sm md:rounded-[4.5rem]"
-			src="https://images.pexels.com/photos/6033812/pexels-photo-6033812.jpeg"
-		/>
-	</div>
+    <section class="mx-auto w-full max-w-5xl space-y-10 px-6 pb-24 pt-14 sm:pt-20">
+        <Hero title="Page Not Found" tagline="Not found" />
+        <img
+            alt=""
+            src={notFound.src}
+            width={notFound.width}
+            height={notFound.height}
+            class="mx-auto aspect-[4/3] w-full max-w-xl rounded-sm border border-rail object-cover"
+        />
+    </section>
 </BaseLayout>

@@ -1,117 +1,118 @@
 ---
-import ContactCTA from '../components/ContactCTA.astro';
-import Hero from '../components/Hero.astro';
-import BaseLayout from '../layouts/BaseLayout.astro';
-import profile_landscape from "../resources/profile_landscape.jpg";
+import ContactCTA from "../components/ContactCTA.astro";
+import Hero from "../components/Hero.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import profile from "../resources/profile_landscape.jpg";
+
+const skills: { label: string; items: string }[] = [
+    {
+        label: "Programming languages",
+        items: "Python, C, C++, TypeScript, Rust, Java, JavaScript",
+    },
+    {
+        label: "Databases & Storage",
+        items: "SQL, Postgres, MySQL, DynamoDB, Drizzle ORM, Hibernate ORM, S3, Redis, Spanner",
+    },
+    {
+        label: "ML/AI",
+        items: "LLMs, RAG, MCP, Codex, LangChain, LlamaIndex, PyTorch, Classical ML",
+    },
+    {
+        // Blaze / Bazel
+        label: "Infra & CI/CD",
+        items: "Git, Docker, Kubernetes, Terraform, Ansible, GitLab Runners, GitHub Actions, Git hooks",
+    },
+    {
+        label: "Frontend",
+        items: "React, React Native (Expo), Next.js, Tailwind CSS, shadcn/ui, HTML/CSS/JS",
+    },
+    {
+        label: "Documentation",
+        items: "Markdown, LaTeX, draw.io, Mermaid Chart, Google Workspace, Microsoft 365",
+    },
+    {
+        label: "Misc",
+        items: "Linux, Bash, PowerShell, Windows 11, macOS, zsh",
+    },
+];
 ---
 
 <BaseLayout title="About | Saleh Hassen" description="About Saleh Hassen">
-	<div class="stack gap-20">
-		<main class="wrapper about">
-			<Hero
-				title="About"
-				tagline="Thanks for stopping by. Here's more info about me."
-			>
-				<img
-					width="800"
-					height="600"
-					src={profile_landscape.src}
-					alt="Saleh Hassen"
-				/>
+    <div class="mx-auto w-full max-w-5xl px-6 pb-20 pt-14 sm:pt-20">
+        <Hero
+            title="About"
+            tagline="Thanks for stopping by. Here's more info about me."
+        />
 
-			</Hero>
+        <img
+            src={profile.src}
+            width={profile.width}
+            height={profile.height}
+            alt="Saleh Hassen"
+            class="mt-10 aspect-[16/9] w-full rounded-sm border border-rail object-cover"
+        />
 
-			<section>
-				<h2 class="section-title">Background</h2>
-				<div class="content">
-					<p>
-						I'm a professional problem solver that likes creating solutions with technology. I've worked at Google and Two Six Technologies and I've been a part of several projects including Cornell University Autonomous Underwater Vehicles, FIRST Robotics, and more.
-					</p>
-					<p>
-						I'm from Northern Virginia and it's shaped a lot of who I am today. I appreciate being near family and calling this area home again.
-					</p>
+        <div class="mt-16 space-y-14">
+            <section class="grid gap-4 md:grid-cols-[12rem_1fr] md:gap-10">
+                <h2
+                    class="font-mono text-meta uppercase tracking-[0.14em] text-faint md:pt-1.5"
+                >
+                    Background
+                </h2>
+                <div class="max-w-[62ch] space-y-4">
+                    <p>
+                        I'm a professional problem solver that likes creating
+                        solutions with technology. I've worked at Google and Two
+                        Six Technologies and I've been a part of several
+                        projects including Cornell University Autonomous
+                        Underwater Vehicles, FIRST Robotics, and more.
+                    </p>
+                    <p>
+                        I'm from Northern Virginia and it's shaped a lot of who
+                        I am today. I appreciate being near family and calling
+                        this area home again.
+                    </p>
+                </div>
+            </section>
 
-				</div>
-			</section>
-			<section>
-				<h2 class="section-title">Education</h2>
-				<div class="content">
-					<p>Cornell University, Bachelors of Science, Major: Electrical & Computer Engineering and Computer Science (double major)</p>
-				</div>
-			</section>
-			<section>
-				<h2 class="section-title">Skills</h2>
+            <section class="grid gap-4 md:grid-cols-[12rem_1fr] md:gap-10">
+                <h2
+                    class="font-mono text-meta uppercase tracking-[0.14em] text-faint md:pt-1.5"
+                >
+                    Education
+                </h2>
+                <div class="max-w-[62ch]">
+                    <p>
+                        Cornell University, Bachelors of Science, Major:
+                        Electrical &amp; Computer Engineering and Computer
+                        Science (double major)
+                    </p>
+                </div>
+            </section>
 
-				<div class="content">
-					<p><b>Programming languages</b>: Python, C, C++, TypeScript, Rust, Java, JavaScript</p>
-					<p><b>Databases & Storage</b>: SQL, Postgres, MySQL, DynamoDB, Drizzle ORM, Hibernate ORM, S3, Redis, Spanner</p>
-					<p><b>ML/AI</b>: LLMs, RAG, MCP, Codex, LangChain, LlamaIndex, PyTorch, Classical ML</p>
-					<p><b>Infra & CI/CD</b>: Git, Docker, Kubernetes, Terraform, Ansible, GitLab Runners, GitHub Actions, Git hooks</p> <!-- Blaze / Bazel -->
-					<p><b>Frontend</b>: React, React Native (Expo), Next.js, Tailwind CSS, shadcn/ui, HTML/CSS/JS</p>
-					<p><b>Documentation</b>: Markdown, LaTeX, draw.io, Mermaid Chart, Google Workspace, Microsoft 365</p>
-					<p><b>Misc</b>: Linux, Bash, PowerShell, Windows 11, macOS, zsh</p>
-				</div>
-			</section>
-		</main>
+            <section class="grid gap-4 md:grid-cols-[12rem_1fr] md:gap-10">
+                <h2
+                    class="font-mono text-meta uppercase tracking-[0.14em] text-faint md:pt-1.5"
+                >
+                    Skills
+                </h2>
+                <dl
+                    class="max-w-[62ch] divide-y divide-rail border-y border-rail"
+                >
+                    {
+                        skills.map(({ label, items }) => (
+                            <div class="grid gap-1 py-3 sm:grid-cols-[13.5rem_1fr] sm:gap-6">
+                                <dt class="font-mono text-meta uppercase tracking-[0.14em] text-accent sm:pt-1">
+                                    {label}
+                                </dt>
+                                <dd class="text-[0.95rem]">{items}</dd>
+                            </div>
+                        ))
+                    }
+                </dl>
+            </section>
+        </div>
+    </div>
 
-		<ContactCTA />
-	</div>
+    <ContactCTA />
 </BaseLayout>
-
-<style>
-	.about {
-		display: flex;
-		flex-direction: column;
-		gap: 3.5rem;
-	}
-
-	img {
-		margin-top: 1.5rem;
-		border-radius: 1.5rem;
-		box-shadow: var(--shadow-md);
-	}
-
-	section {
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
-		color: var(--gray-200);
-	}
-
-	.section-title {
-		grid-column-start: 1;
-		font-size: var(--text-xl);
-		color: var(--gray-0);
-	}
-
-	.content {
-		grid-column: 2 / 4;
-	}
-
-	.content :global(a) {
-		text-decoration: 1px solid underline transparent;
-		text-underline-offset: 0.25em;
-		transition: text-decoration-color var(--theme-transition);
-	}
-
-	.content :global(a:hover),
-	.content :global(a:focus) {
-		text-decoration-color: currentColor;
-	}
-
-	@media (min-width: 50em) {
-		.about {
-			display: grid;
-			grid-template-columns: 1fr 60% 1fr;
-		}
-
-		.about > :global(:first-child) {
-			grid-column-start: 2;
-		}
-
-		section {
-			display: contents;
-			font-size: var(--text-lg);
-		}
-	}
-</style>

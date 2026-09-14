@@ -1,16 +1,24 @@
-<div class="pill"><slot /></div>
+---
+interface Props {
+    /** `accent` marks topics and tags; `signal` is reserved for status. */
+    tone?: "accent" | "signal";
+    class?: string;
+}
 
-<style>
-	.pill {
-		display: flex;
-		padding: 0.5rem 1rem;
-		gap: 0.5rem;
-		color: var(--accent-text-over);
-		border: 1px solid var(--accent-regular);
-		background-color: var(--accent-regular);
-		border-radius: 999rem;
-		font-size: var(--text-md);
-		line-height: 1.35;
-		white-space: nowrap;
-	}
-</style>
+const { tone = "accent", class: className = "" } = Astro.props;
+
+const tones = {
+    accent: "border-accent/35 bg-accent-soft text-accent",
+    signal: "border-signal/35 bg-signal-soft text-signal",
+};
+---
+
+<span
+    class:list={[
+        "inline-flex items-center gap-1.5 whitespace-nowrap rounded-xs border px-2 py-1 font-mono text-meta uppercase tracking-[0.14em]",
+        tones[tone],
+        className,
+    ]}
+>
+    <slot />
+</span>

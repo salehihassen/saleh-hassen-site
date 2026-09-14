@@ -1,12 +1,12 @@
 ---
 import { getCollection } from "astro:content";
+
 import ContactCTA from "../components/ContactCTA.astro";
-import Grid from "../components/Grid.astro";
+import EntryRow from "../components/EntryRow.astro";
 import Hero from "../components/Hero.astro";
-import BlogPreview from "../components/BlogPreview.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-const blog_posts = (await getCollection("blog")).sort(
+const posts = (await getCollection("blog")).sort(
     (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
 );
 ---
@@ -15,23 +15,14 @@ const blog_posts = (await getCollection("blog")).sort(
     title="Blog | Saleh Hassen"
     description="A few posts written by me on different interests."
 >
-    <div class="stack gap-20">
-        <main class="wrapper stack gap-8">
-            <Hero
-                title="Blog"
-                tagline="A few posts written by me on different interests. My promise: none of the following writing was written by Gen AI."
-                align="start"
-            />
-            <Grid variant="offset">
-                {
-                    blog_posts.map((blog_post) => (
-                        <li>
-                            <BlogPreview blog={blog_post} />
-                        </li>
-                    ))
-                }
-            </Grid>
-        </main>
-        <ContactCTA />
-    </div>
+    <section class="mx-auto w-full max-w-5xl space-y-10 px-6 pb-20 pt-14 sm:pt-20">
+        <Hero
+            title="Blog"
+            tagline="A few posts written by me on different interests. My promise: none of the following writing was written by Gen AI."
+        />
+        <ul>
+            {posts.map((post) => <EntryRow entry={post} base="blog" />)}
+        </ul>
+    </section>
+    <ContactCTA />
 </BaseLayout>

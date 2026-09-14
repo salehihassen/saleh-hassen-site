@@ -5,12 +5,18 @@ import { iconPaths } from "./IconPaths";
 interface Props {
     icon: keyof typeof iconPaths;
     color?: string;
-    gradient?: boolean;
     size?: string;
     viewBox?: string;
+    class?: string;
 }
 
-const { color = "currentcolor", icon, size, viewBox = "0 0 256 256" } = Astro.props;
+const {
+    color = "currentcolor",
+    icon,
+    size,
+    viewBox = "0 0 256 256",
+    class: className = "",
+} = Astro.props;
 const iconPath = iconPaths[icon];
 
 const attrs: HTMLAttributes<"svg"> = {};
@@ -19,12 +25,11 @@ if (size) attrs.style = { "--size": size };
 
 <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="40"
-    height="40"
     viewBox={viewBox}
     aria-hidden="true"
     stroke={color}
     fill={color}
+    class:list={["inline-block shrink-0 align-middle", className]}
     {...attrs}
 >
     <g set:html={iconPath} />
@@ -32,7 +37,6 @@ if (size) attrs.style = { "--size": size };
 
 <style>
     svg {
-        vertical-align: middle;
         width: var(--size, 1em);
         height: var(--size, 1em);
     }

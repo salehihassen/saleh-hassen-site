@@ -1,56 +1,23 @@
 ---
 interface Props {
-	href: string;
+    href: string;
+    variant?: "solid" | "quiet";
 }
 
-const { href } = Astro.props;
+const { href, variant = "solid" } = Astro.props;
+
+const variants = {
+    solid: "border-accent bg-accent text-page hover:bg-transparent hover:text-accent",
+    quiet: "border-rail text-ink hover:border-accent hover:text-accent",
+};
 ---
 
-<a href={href}><slot /></a>
-
-<style>
-	a {
-		position: relative;
-		display: flex;
-		place-content: center;
-		text-align: center;
-		padding: 0.56em 2em;
-		gap: 0.8em;
-		color: var(--accent-text-over);
-		text-decoration: none;
-		line-height: 1.1;
-		border-radius: 999rem;
-		overflow: hidden;
-		background: var(--gradient-accent-orange);
-		box-shadow: var(--shadow-md);
-		white-space: nowrap;
-	}
-
-	@media (min-width: 20em) {
-		a {
-			font-size: var(--text-lg);
-		}
-	}
-
-	/* Overlay for hover effects. */
-	a::after {
-		content: '';
-		position: absolute;
-		inset: 0;
-		pointer-events: none;
-		transition: background-color var(--theme-transition);
-		mix-blend-mode: overlay;
-	}
-
-	a:focus::after,
-	a:hover::after {
-		background-color: hsla(var(--gray-999-basis), 0.3);
-	}
-
-	@media (min-width: 50em) {
-		a {
-			padding: 1.125rem 2.5rem;
-			font-size: var(--text-xl);
-		}
-	}
-</style>
+<a
+    href={href}
+    class:list={[
+        "inline-flex items-center justify-center gap-2 rounded-sm border px-5 py-2.5 font-mono text-meta uppercase tracking-[0.14em] transition-colors duration-200",
+        variants[variant],
+    ]}
+>
+    <slot />
+</a>

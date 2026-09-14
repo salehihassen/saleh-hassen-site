@@ -10,69 +10,74 @@ const {
     title = "Saleh Hassen's site",
     description = "Portfolio, blog, and other things in my small corner of the internet.",
 } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin);
 ---
 
 <meta charset="UTF-8" />
-<meta name="description" property="og:description" content={description} />
-<meta name="viewport" content="width=device-width" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="generator" content={Astro.generator} />
 <title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical.href} />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical.href} />
+<meta name="twitter:card" content="summary_large_image" />
+
+<meta
+    name="theme-color"
+    content="#f6f7f5"
+    media="(prefers-color-scheme: light)"
+/>
+<meta
+    name="theme-color"
+    content="#0c1214"
+    media="(prefers-color-scheme: dark)"
+/>
 
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
-    href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,700;1,400&family=Rubik:wght@500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..700&family=IBM+Plex+Mono:wght@400;500&display=swap"
     rel="stylesheet"
 />
+
 <script is:inline>
     const THEME_KEY = "theme";
 
-    // Retrieve saved user theme or null
-    const getStoredTheme = () => {
-        if (typeof localStorage !== "undefined") {
-            return localStorage.getItem(THEME_KEY);
-        }
-        return null;
-    };
-
-    // Determine initial theme based on saved preference or system preference
     const applyTheme = (theme) => {
-        const isDark = theme === "dark";
-        document.documentElement.classList[isDark ? "add" : "remove"](
-            "theme-dark",
-        );
+        document.documentElement.classList[
+            theme === "dark" ? "add" : "remove"
+        ]("theme-dark");
     };
 
-    // Initialize theme on page load
-    const storedTheme = getStoredTheme();
-    const systemPrefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)",
-    ).matches;
+    const stored =
+        typeof localStorage !== "undefined"
+            ? localStorage.getItem(THEME_KEY)
+            : null;
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
 
-    if (storedTheme) {
-        applyTheme(storedTheme);
-    } else {
-        applyTheme(systemPrefersDark ? "dark" : "light");
-    }
+    applyTheme(stored ?? (media.matches ? "dark" : "light"));
 
-    // Listen for system theme changes and update theme only if no user preference
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    mediaQuery.addEventListener("change", (e) => {
-        const newSystemPrefersDark = e.matches;
-        const currentStoredTheme = getStoredTheme();
-        // Only update theme if user has not set a preference
-        // if (!currentStoredTheme) {
-        applyTheme(newSystemPrefersDark ? "dark" : "light");
-        // }
+    // Follow the system only while the visitor hasn't picked a theme themselves.
+    media.addEventListener("change", (e) => {
+        if (!localStorage.getItem(THEME_KEY)) {
+            applyTheme(e.matches ? "dark" : "light");
+        }
     });
 
-    // Persist user preference when documentElement classes change
     if (typeof localStorage !== "undefined") {
         const observer = new MutationObserver(() => {
-            const isDark =
-                document.documentElement.classList.contains("theme-dark");
-            localStorage.setItem(THEME_KEY, isDark ? "dark" : "light");
+            localStorage.setItem(
+                THEME_KEY,
+                document.documentElement.classList.contains("theme-dark")
+                    ? "dark"
+                    : "light",
+            );
         });
         observer.observe(document.documentElement, {
             attributes: true,

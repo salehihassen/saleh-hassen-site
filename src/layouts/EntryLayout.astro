@@ -1,0 +1,76 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+
+import ContactCTA from "../components/ContactCTA.astro";
+import Icon from "../components/Icon.astro";
+import Pill from "../components/Pill.astro";
+import BaseLayout from "./BaseLayout.astro";
+import { formatDate } from "../utils/entry";
+
+interface Props {
+    entry: CollectionEntry<"work"> | CollectionEntry<"blog">;
+    base: "work" | "blog";
+    backLabel: string;
+}
+
+const { entry, base, backLabel } = Astro.props;
+const { data } = entry;
+---
+
+<BaseLayout title={data.title} description={data.description}>
+    <article>
+        <header class="border-b border-rail">
+            <div
+                class="mx-auto w-full max-w-3xl space-y-5 px-6 pb-10 pt-10 sm:pt-14"
+            >
+                <a
+                    href={`/${base}/`}
+                    class="group inline-flex items-center gap-2 font-mono text-meta uppercase tracking-[0.14em] text-faint transition-colors duration-200 hover:text-accent"
+                >
+                    <Icon
+                        icon="arrow-left"
+                        size="1rem"
+                        class="transition-transform duration-200 group-hover:-translate-x-1"
+                    />
+                    {backLabel}
+                </a>
+
+                <h1 class="text-display-md">{data.title}</h1>
+
+                <p class="max-w-[58ch] text-lg leading-relaxed text-muted">
+                    {data.description}
+                </p>
+
+                <div class="flex flex-wrap items-center gap-2 pt-1">
+                    <span
+                        class="font-mono text-meta uppercase tracking-[0.14em] text-faint"
+                    >
+                        <time datetime={data.publishDate.toISOString()}>
+                            {formatDate(data.publishDate)}
+                        </time>
+                    </span>
+                    <span aria-hidden="true" class="h-3 w-px bg-rail"></span>
+                    {data.tags.map((tag) => <Pill>{tag}</Pill>)}
+                </div>
+            </div>
+        </header>
+
+        <div class="mx-auto w-full max-w-3xl space-y-10 px-6 py-12 sm:py-16">
+            {
+                data.img && (
+                    <Image
+                        src={data.img}
+                        alt={data.img_alt || ""}
+                        class="max-h-[26rem] w-full rounded-sm border border-rail object-cover"
+                    />
+                )
+            }
+            <div class="article mx-auto max-w-[68ch]">
+                <slot />
+            </div>
+        </div>
+    </article>
+
+    <ContactCTA />
+</BaseLayout>

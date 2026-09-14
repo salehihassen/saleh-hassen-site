@@ -1,281 +1,306 @@
 @import "tailwindcss";
 
-/* Global variables */
+/* The theme toggle sets `.theme-dark` on <html>, so wire Tailwind's `dark:` to it. */
+@custom-variant dark (&:where(.theme-dark, .theme-dark *));
+
+/*
+ * Palette: a machine room in daylight. Cool slate ink on faintly green off-white,
+ * a deep teal for anything interactive, and a single gold "signal" reserved for
+ * status — the one thing on the page that means "this is still running".
+ */
 :root {
-    /* Colors */
-    --gray-0: #090b11;
-    --gray-50: #141925;
-    --gray-100: #283044;
-    --gray-200: #3d4663;
-    --gray-300: #505d84;
-    --gray-400: #6474a2;
-    --gray-500: #8490b5;
-    --gray-600: #a3acc8;
-    --gray-700: #c3cadb;
-    --gray-800: #e3e6ee;
-    --gray-900: #f3f4f7;
-    --gray-999-basis: 0, 0%, 100%;
-    --gray-999_40: hsla(var(--gray-999-basis), 0.4);
-    --gray-999: #ffffff;
-
-    --accent-light: #87abab;
-    --accent-regular: #587b;
-    --accent-dark: #3b5254;
-    --accent-overlay: rgba(55, 55, 50, 0.7);
-    --accent-subtle-overlay: rgba(88, 123, 127, 0.3);
-    --accent-text-over: var(--gray-0);
-
-    --link-color: var(--accent-dark);
-
-    --gradient-stop-1: #d3d0cb;
-    --gradient-subtle: linear-gradient(
-        150deg,
-        var(--gray-900) 19%,
-        var(--gray-999) 81%
-    );
-    --gradient-accent-orange: linear-gradient(
-        150deg,
-        #587b7f,
-        var(--accent-regular),
-        var(--accent-light)
-    );
-    --gradient-stroke: linear-gradient(
-        180deg,
-        var(--gray-600),
-        var(--gray-800)
-    );
-
-    /* Shadows */
-    --shadow-sm:
-        0px 6px 3px rgba(9, 11, 17, 0.01), 0px 4px 2px rgba(9, 11, 17, 0.01),
-        0px 2px 2px rgba(9, 11, 17, 0.02), 0px 0px 1px rgba(9, 11, 17, 0.03);
-    --shadow-md:
-        0px 28px 11px rgba(9, 11, 17, 0.01),
-        0px 16px 10px rgba(9, 11, 17, 0.03), 0px 7px 7px rgba(9, 11, 17, 0.05),
-        0px 2px 4px rgba(9, 11, 17, 0.06);
-    --shadow-lg:
-        0px 62px 25px rgba(9, 11, 17, 0.01),
-        0px 35px 21px rgba(9, 11, 17, 0.05), 0px 16px 16px rgba(9, 11, 17, 0.1),
-        0px 4px 9px rgba(9, 11, 17, 0.12);
-
-    /* Text Sizes */
-    --text-sm: 0.875rem;
-    --text-base: 1rem;
-    --text-md: 1.125rem;
-    --text-lg: 1.25rem;
-    --text-xl: 1.625rem;
-    --text-2xl: 2.125rem;
-    --text-3xl: 2.625rem;
-    --text-4xl: 3.5rem;
-    --text-5xl: 4.5rem;
-
-    /* Fonts */
-    --font-system:
-        system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-        Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-    --font-body: "Public Sans", var(--font-system);
-    --font-brand: Rubik, var(--font-system);
-
-    /* Transitions */
-    --theme-transition: 0.2s ease-in-out;
+    --c-page: #f6f7f5;
+    --c-surface: #ffffff;
+    --c-ink: #131a1e;
+    --c-muted: #55666b;
+    --c-faint: #5f6f71;
+    --c-rail: #dde2e0;
+    --c-accent: #2f6e6a;
+    --c-accent-soft: #e7f0ee;
+    --c-signal: #8a6003;
+    --c-signal-soft: #f7edd8;
 }
 
 :root.theme-dark {
-    --gray-0: #ffffff;
-    --gray-50: #f3f4f7;
-    --gray-100: #e3e6ee;
-    --gray-200: #c3cadb;
-    --gray-300: #a3acc8;
-    --gray-400: #8490b5;
-    --gray-500: #6474a2;
-    --gray-600: #505d84;
-    --gray-700: #3d4663;
-    --gray-800: #283044;
-    --gray-900: #141925;
-    --gray-999-basis: 225, 31%, 5%;
-    --gray-999: #090b11;
-
-    --accent-light: #3b5254;
-    --accent-regular: #546665;
-    --accent-dark: #7b9fa3;
-    --accent-overlay: rgba(88, 123, 127, 0.6);
-    --accent-subtle-overlay: rgba(88, 123, 127, 0.6);
-    --accent-text-over: var(--gray-0);
-
-    --link-color: var(--accent-dark);
-
-    --gradient-stop-1: #d3d0cb;
-    --gradient-stop-2: #546665;
-    --gradient-stop-3: #54687;
-    --gradient-subtle: linear-gradient(
-        150deg,
-        var(--gray-900) 19%,
-        var(--gray-999) 81%
-    );
-    --gradient-accent-orange: linear-gradient(
-        150deg,
-        #587b7f,
-        var(--accent-regular),
-        var(--accent-light)
-    );
-    --gradient-stroke: linear-gradient(
-        180deg,
-        var(--gray-600),
-        var(--gray-800)
-    );
-
-    --shadow-sm:
-        0px 6px 3px rgba(255, 255, 255, 0.01),
-        0px 4px 2px rgba(255, 255, 255, 0.01),
-        0px 2px 2px rgba(255, 255, 255, 0.02),
-        0px 0px 1px rgba(255, 255, 255, 0.03);
-    --shadow-md:
-        0px 28px 11px rgba(255, 255, 255, 0.01),
-        0px 16px 10px rgba(255, 255, 255, 0.03),
-        0px 7px 7px rgba(255, 255, 255, 0.05),
-        0px 2px 4px rgba(255, 255, 255, 0.06);
-    --shadow-lg:
-        0px 62px 25px rgba(255, 255, 255, 0.01),
-        0px 35px 21px rgba(255, 255, 255, 0.05),
-        0px 16px 16px rgba(255, 255, 255, 0.1),
-        0px 4px 9px rgba(255, 255, 255, 0.12);
+    --c-page: #0c1214;
+    --c-surface: #121a1d;
+    --c-ink: #e8edec;
+    --c-muted: #9aabac;
+    --c-faint: #748587;
+    --c-rail: #223034;
+    --c-accent: #6fbdb2;
+    --c-accent-soft: #16302f;
+    --c-signal: #e9b44c;
+    --c-signal-soft: #2a220f;
 }
 
-html,
-body {
-    min-height: 100%;
-    overflow-x: hidden;
+@theme inline {
+    --color-page: var(--c-page);
+    --color-surface: var(--c-surface);
+    --color-ink: var(--c-ink);
+    --color-muted: var(--c-muted);
+    --color-faint: var(--c-faint);
+    --color-rail: var(--c-rail);
+    --color-accent: var(--c-accent);
+    --color-accent-soft: var(--c-accent-soft);
+    --color-signal: var(--c-signal);
+    --color-signal-soft: var(--c-signal-soft);
+
+    /* Archivo carries headings, UI, and body copy alike; IBM Plex Mono labels
+       the metadata a machine would have printed. */
+    --font-display: "Archivo", ui-sans-serif, system-ui, sans-serif;
+    --font-sans: "Archivo", ui-sans-serif, system-ui, sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+
+    --text-meta: 0.6875rem;
+    --text-meta--line-height: 1.4;
+    --text-meta--letter-spacing: 0.14em;
+
+    --text-display-sm: clamp(1.5rem, 1.28rem + 0.9vw, 1.9rem);
+    --text-display-sm--line-height: 1.15;
+    --text-display-sm--letter-spacing: -0.018em;
+    --text-display-md: clamp(1.9rem, 1.5rem + 1.7vw, 2.7rem);
+    --text-display-md--line-height: 1.1;
+    --text-display-md--letter-spacing: -0.024em;
+    --text-display-lg: clamp(2.6rem, 1.7rem + 3.9vw, 4.6rem);
+    --text-display-lg--line-height: 0.98;
+    --text-display-lg--letter-spacing: -0.035em;
+
+    --radius-xs: 2px;
+    --radius-sm: 4px;
+    --radius-md: 6px;
+
+    --ease-out-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-body {
-    background-color: var(--gray-999);
-    color: var(--gray-200);
-    font-family: var(--font-body);
-    -webkit-font-smoothing: antialiased;
-    line-height: 1.5;
-}
-
-*,
-*::after,
-*::before {
-    box-sizing: border-box;
-    margin: 0;
-}
-
-img {
-    max-width: 100%;
-    height: auto;
-}
-
-a {
-    color: var(--link-color);
-}
-
-h1,
-h2,
-h3,
-h4,
-h5 {
-    line-height: 1.1;
-    font-family: var(--font-brand);
-    font-weight: 600;
-    color: var(--gray-100);
-}
-
-h1 {
-    font-size: var(--text-5xl);
-}
-
-h2 {
-    font-size: var(--text-4xl);
-}
-
-h3 {
-    font-size: var(--text-3xl);
-}
-
-h4 {
-    font-size: var(--text-2xl);
-}
-
-h5 {
-    font-size: var(--text-xl);
-}
-
-/* Utilities */
-
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
-}
-
-.wrapper {
-    width: 100%;
-    max-width: 83rem;
-    margin-inline: auto;
-    padding-inline: 1.5rem;
-}
-
-.stack {
-    display: flex;
-    flex-direction: column;
-}
-
-.gap-2 {
-    gap: 0.5rem;
-}
-.gap-4 {
-    gap: 1rem;
-}
-.gap-8 {
-    gap: 2rem;
-}
-.gap-10 {
-    gap: 2.5rem;
-}
-.gap-15 {
-    gap: 3.75rem;
-}
-.gap-20 {
-    gap: 5rem;
-}
-.gap-30 {
-    gap: 7.5rem;
-}
-.gap-48 {
-    gap: 12rem;
-}
-
-@media (min-width: 50em) {
-    .lg\:gap-2 {
-        gap: 0.5rem;
+@layer base {
+    html {
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
     }
-    .lg\:gap-4 {
-        gap: 1rem;
+
+    body {
+        background-color: var(--c-page);
+        color: var(--c-muted);
+        font-family: var(--font-sans);
+        font-size: 1.0625rem;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        min-height: 100svh;
     }
-    .lg\:gap-8 {
-        gap: 2rem;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: var(--font-display);
+        color: var(--c-ink);
+        font-weight: 600;
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+        text-wrap: balance;
     }
-    .lg\:gap-10 {
-        gap: 2.5rem;
+
+    img,
+    svg {
+        max-width: 100%;
+        height: auto;
     }
-    .lg\:gap-15 {
-        gap: 3.75rem;
+
+    ::selection {
+        background-color: var(--c-accent);
+        color: var(--c-page);
     }
-    .lg\:gap-20 {
-        gap: 5rem;
+
+    :focus-visible {
+        outline: 2px solid var(--c-accent);
+        outline-offset: 3px;
+        border-radius: 2px;
     }
-    .lg\:gap-30 {
-        gap: 7.5rem;
+
+    @media (prefers-reduced-motion: reduce) {
+        html {
+            scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-delay: 0s !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
     }
-    .lg\:gap-48 {
-        gap: 12rem;
+}
+
+/*
+ * The hero rungs deal themselves in on load, top layer to bottom, so the first
+ * thing the page does is read itself out from browser down to metal.
+ */
+@keyframes rung-in {
+    from {
+        opacity: 0;
+        transform: translateY(0.6rem);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@utility deal-in {
+    animation: rung-in 0.55s var(--ease-out-soft) both;
+    animation-delay: calc(var(--deal-index, 0) * 90ms);
+}
+
+/*
+ * Long-form article body: the same Archivo as the rest of the site, at the
+ * body size, with a looser line-height for sustained reading.
+ */
+@utility article {
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    color: var(--c-ink);
+
+    & > * + * {
+        margin-top: 1.15em;
+    }
+
+    & h1,
+    & h2,
+    & h3,
+    & h4,
+    & h5 {
+        font-family: var(--font-display);
+        margin-top: 2.4em;
+        margin-bottom: -0.4em;
+        letter-spacing: -0.02em;
+    }
+
+    & h1,
+    & h2 {
+        font-size: 1.55rem;
+        padding-bottom: 0.4rem;
+        border-bottom: 1px solid var(--c-rail);
+    }
+
+    & h3 {
+        font-size: 1.3rem;
+    }
+
+    & h4,
+    & h5 {
+        font-size: 1.1rem;
+        color: var(--c-muted);
+    }
+
+    & a {
+        color: var(--c-accent);
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 0.2em;
+        text-decoration-color: color-mix(in srgb, var(--c-accent) 40%, transparent);
+        transition: text-decoration-color 0.15s var(--ease-out-soft);
+    }
+
+    & a:hover {
+        text-decoration-color: currentColor;
+    }
+
+    & strong,
+    & b {
+        color: var(--c-ink);
+        font-weight: 600;
+    }
+
+    & ul,
+    & ol {
+        padding-inline-start: 1.4em;
+    }
+
+    & ul {
+        list-style: disc;
+    }
+
+    & ol {
+        list-style: decimal;
+    }
+
+    & li::marker {
+        color: var(--c-faint);
+    }
+
+    & li + li {
+        margin-top: 0.4em;
+    }
+
+    & blockquote {
+        border-inline-start: 2px solid var(--c-accent);
+        padding-inline-start: 1.25rem;
+        color: var(--c-muted);
+    }
+
+    & code {
+        font-family: var(--font-mono);
+        font-size: 0.85em;
+        background-color: var(--c-accent-soft);
+        color: var(--c-ink);
+        padding: 0.15em 0.4em;
+        border-radius: var(--radius-xs);
+    }
+
+    & pre {
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        line-height: 1.6;
+        background-color: var(--c-surface);
+        border: 1px solid var(--c-rail);
+        border-radius: var(--radius-sm);
+        padding: 1rem 1.15rem;
+        overflow-x: auto;
+    }
+
+    & pre code {
+        background: none;
+        padding: 0;
+        font-size: inherit;
+    }
+
+    & img {
+        border-radius: var(--radius-sm);
+        border: 1px solid var(--c-rail);
+    }
+
+    & hr {
+        border: 0;
+        border-top: 1px solid var(--c-rail);
+        margin-block: 2.5em;
+    }
+
+    & table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: var(--font-sans);
+        font-size: 0.95rem;
+    }
+
+    & th,
+    & td {
+        text-align: start;
+        padding: 0.5rem 0.75rem;
+        border-bottom: 1px solid var(--c-rail);
+    }
+
+    & th {
+        font-family: var(--font-mono);
+        font-size: var(--text-meta);
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--c-faint);
     }
 }

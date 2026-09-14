@@ -1,0 +1,20 @@
+---
+/**
+ * Small mono label that sits above a heading. Use it for a short category or
+ * section name — a few words, not a sentence.
+ */
+interface Props {
+    class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+---
+
+<p
+    class:list={[
+        "font-mono text-meta uppercase tracking-[0.14em] text-faint",
+        className,
+    ]}
+>
+    <slot />
+</p>
