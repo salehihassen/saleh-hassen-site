@@ -5,8 +5,10 @@
   "scripts": {
     "dev": "astro dev",
     "dev2go": "astro dev --host 0.0.0.0",
+    "check": "astro check",
     "build": "astro build",
     "preview": "astro preview",
+    "preview2go": "astro preview --host 0.0.0.0",
     "astro": "astro"
   },
   "dependencies": {
@@ -14,5 +16,9 @@
     "@tailwindcss/vite": "^4.2.4",
     "astro": "^6.1.4",
     "tailwindcss": "^4.2.4"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "typescript": "^5.9.3"
   }
 }
