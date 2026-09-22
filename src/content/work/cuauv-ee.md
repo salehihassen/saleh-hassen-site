@@ -81,6 +81,8 @@ The summer after freshman year when I stayed to help with integration and testin
 
 Being on the other side, screening applicants was also an interesting experience. For those interested in applying, show genuine interest, and no matter what do not say "you have an affinity for water". That phrase kept showing up for applications before the LLM days and I don't know if this was another project team's prank or applicants trying to tie themselves as much as possible to the project team. 
 
+![](../../resources/cuauv-ee/h-bridge.png)
+
 I also really appreciated the interviewing process for the team assessing your ability to problem solve. Two common interview problems we did was how to drive a motor w/ an H bridge and how you can control a motor's speed w/ a digital signal (PWM). Even if you didn't know these concepts, enough context was provided and hinted to the candidate that they would still have a shot of reaching a good solution. For example, electricity flows from high potential (voltage) to low potential and in this schematic here these symbols (transistors) act as switches. We need to control these switches such that the motor is moving forward. I also have to thank my time on FIRST robotics and my technical mentors that I was familiar with motors, motor controllers, and H bridges. 
 
 ## Laptop Falling apart and learning Linux
