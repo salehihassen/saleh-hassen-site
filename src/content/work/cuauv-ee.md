@@ -1,6 +1,6 @@
 ---
 title: Electrical Engineering at CUAUV
-publishDate: 2026-09-14 00:00:00
+publishDate: 2026-09-22 15:00:00
 img: ../../resources/cuauv-ee/20180802_124204.jpg
 img_alt: A bright pink sheet of paper used to wrap flowers curves in front of rich blue background
 description: |
