@@ -105,4 +105,4 @@ I really appreciated my time on this team. Many thanks to the peers and friends 
 
 - [CUAUV Site](https://cuauv.org/)
 - [2023 blog post by Parker Schless improving Merge board](https://medium.com/@cuauv.cornell/blowing-the-sub-up-is-not-ideal-i-am-looking-at-you-merge-board-55119c93d46)
--
+- [Member spotlight](https://www.facebook.com/cornellauv/photos/new-member-spotlight-2018name-saleh-hassen-major-electrical-and-computer-enginee/1592221814207092/)
