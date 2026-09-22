@@ -272,6 +272,10 @@
     }
 
     & img {
+        display: block;
+        width: auto;
+        max-height: 30rem;
+        margin-inline: auto;
         border-radius: var(--radius-sm);
         border: 1px solid var(--c-rail);
     }
