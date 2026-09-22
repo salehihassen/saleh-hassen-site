@@ -1,7 +1,7 @@
 ---
 title: Electrical Engineering at CUAUV
 publishDate: 2026-09-14 00:00:00
-img: ../../resources/stock-2.jpg
+img: ../../resources/cuauv-ee/20180802_124204.jpg
 img_alt: A bright pink sheet of paper used to wrap flowers curves in front of rich blue background
 description: |
   Designing and implementing ATMega powered subsystems
@@ -18,6 +18,8 @@ Over 5 years ago, from 2017 to 2021, I was part of the Cornell University Autono
 In highschool, what made me most interested in pursuing engineering wasn't the rigorous math and science it required but hands-on problem solving. In higschool, I enjoyed my time building robots with the team for FIRST robotics, getting a robot out for an annual competition. I knew I wanted to do similar project work for my undergrad. 
 
 Cornell University hosts several project teams under the engineering departments enabling student orgs to build for a wide range of projects. I heard about CUAUV from project fest and their annual competition for AUVSI Robosub in San Diego. The team competes to autonomously (without human input) navigate an underwater course and score as many points as possible completing tasks including hitting targets w/ prop torpedos, hitting buoys, and carrying objects.  As an incoming Electrical Engineering student I saw the electrical subteam as a really great opportunity to learn designing and implementing reliable electrical subsystems end to end with greater depth. The last selling point was an inside joke of FIRST robotics, leading up to the game reveal every year someone would claim this would be the year that we had a water game. On this team, water game would be every year. 
+
+![Hall effect sensor Kill switch from 2018 season](../../resources/cuauv-ee/IMG_20180701_215723.jpg)
 
 During my time on the team, every year we rebuilt our two subs for this year's game. Each sub would draw power from two LiPo batteries, distribute that power to the remaining subsystems, provide a serial interface for the sub computer to provide I/O, take in sensor information including acoustics, drive thrusters, and control actuators. Allowing or disabling power to sub's mechatronics, thrusters and actuators, was done with a hall sensor kill switch. Each sub was also fitted with cameras. The pressurized hull kept water from getting into our vehicle damaging the inside electronics. Lastly the backplane board interconnected many of the power and data connections between the boards.
 
@@ -58,6 +60,8 @@ If a correction needed to be made on the board we would either solder jumpers, c
 I believe our software stack was CMake, C, protobuf-c, and AVRDude for Atmel Microcontrollers. Many of the boards had digital I/O, reading of analog measurements such as current shunt monitors either through the Microcontroller's internal ADC or an external ADC connected over SPI or I2C, and then communicating inputs and outputs over serial w/ protobuf-c. The team defined helper libraries for serial communication but a lot of our work still required carefully referencing the Atmel microcontroller's documentation on how to go about an operation, setting the appropriate bitmasks, or how to utilize interrupts. 
 
 # Integration and repairing
+
+![Several subsystems of the vehicle connected with the hull removed.](../../resources/cuauv-ee/20180617_184916.jpg)
 
 Around mid Spring semester all manufacturing of parts from the mechanical and electrical subteams would be done and the team would try to integrate everything together and perform comprehensive tests and checks. If all went well the team would be able to take the sub to occupy the entire swimming pool and give the software team opportunities to test with the subs tethered over ethernet. When the sub batteries were running low we would pull the sub out of the water, swap one battery at a time and continue testing. On occasion, the sub would require some repair including replacing fuses. The sub hull would be repressurized prior to going back into the water.
 
@@ -100,4 +104,3 @@ I really appreciated my time on this team. Many thanks to the peers and friends 
 - [CUAUV Site](https://cuauv.org/)
 - [2023 blog post by Parker Schless improving Merge board](https://medium.com/@cuauv.cornell/blowing-the-sub-up-is-not-ideal-i-am-looking-at-you-merge-board-55119c93d46)
 -
-
