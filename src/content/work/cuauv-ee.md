@@ -21,7 +21,7 @@ Cornell University hosts several project teams under the engineering departments
 
 ![Hall effect sensor Kill switch from 2018 season](../../resources/cuauv-ee/IMG_20180701_215723.jpg)
 
-During my time on the team, every year we rebuilt our two subs for this year's game. Each sub would draw power from two LiPo batteries, distribute that power to the remaining subsystems, provide a serial interface for the sub computer to provide I/O, take in sensor information including acoustics, drive thrusters, and control actuators. Allowing or disabling power to sub's mechatronics, thrusters and actuators, was done with a hall sensor kill switch. Each sub was also fitted with cameras. The pressurized hull kept water from getting into our vehicle damaging the inside electronics. Lastly the backplane board interconnected many of the power and data connections between the boards.
+During my time on the team, every year we rebuilt our two subs for this year's game. Each sub would draw power from two LiPo batteries, distribute that power to the remaining subsystems, provide a serial interface for the sub computer to provide I/O, take in sensor information including acoustics, drive thrusters, and control actuators. Allowing or disabling power to sub's mechatronics, thrusters and actuators, was done with a hall sensor kill switch. Each sub was also fitted with cameras. The pressurized hull kept water from getting into our vehicle damaging the inside electronics. Lastly the backplane board interconnected many of the power and data connections between the boards. Serial communication was converted from TTL level to RS-232 voltage levels to enable reliable communication across the backplane and reduce the effect of signal noise.
 
 # My contributions
 
@@ -96,6 +96,8 @@ In order for the team to use the Teagle pool for testing our vehicles, we would 
 To assist the mechanical team with part manufacturing, a team requirement in the spring is to help sand down parts of our vehicles. We watched movies and chatted a lot for hours. After all the sanding was done, the parts were oxidized to the red and black asthetic matching the school's colors.
 
 # Conclusion
+
+![](../../resources/cuauv-ee/cuauv_spotlight_lol.jpeg)
 
 I really appreciated my time on this team. Many thanks to the peers and friends I met here. Although in my professional career, I leaned more toward Software Engineering, my experience on this team gave me the skills, knowledge, and confidence to contribute toward hardware systems. My experience with Protobufs from this team also gave me a headwind implementing gRPC backends at Google. During my time at Two Six, I was able to reference schematics, implement firmware, and escalate hardware issues I noticed from our prototypes. Sure it may have been a long while ago, but I'm hopeful if I ever need to design another PCB, I can get it done.
 
