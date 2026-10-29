@@ -20,13 +20,13 @@ const { data } = entry;
 
 <BaseLayout title={data.title} description={data.description}>
     <article>
-        <header class="border-b border-rail">
+        <header>
             <div
                 class="mx-auto w-full max-w-3xl space-y-5 px-6 pb-10 pt-10 sm:pt-14"
             >
                 <a
                     href={`/${base}/`}
-                    class="group inline-flex items-center gap-2 font-mono text-meta uppercase tracking-[0.14em] text-faint transition-colors duration-200 hover:text-accent"
+                    class="group inline-flex items-center gap-2 text-sm font-medium text-faint transition-colors duration-200 hover:text-accent"
                 >
                     <Icon
                         icon="arrow-left"
@@ -44,7 +44,7 @@ const { data } = entry;
 
                 <div class="flex flex-wrap items-center gap-2 pt-1">
                     <span
-                        class="font-mono text-meta uppercase tracking-[0.14em] text-faint"
+                        class="font-mono text-meta text-faint"
                     >
                         <time datetime={data.publishDate.toISOString()}>
                             {formatDate(data.publishDate)}
@@ -56,13 +56,13 @@ const { data } = entry;
             </div>
         </header>
 
-        <div class="mx-auto w-full max-w-3xl space-y-10 px-6 py-12 sm:py-16">
+        <div class="mx-auto w-full max-w-3xl space-y-10 px-6 pb-16 sm:pb-20">
             {
                 data.img && (
                     <Image
                         src={data.img}
                         alt={data.img_alt || ""}
-                        class="max-h-[26rem] w-full rounded-sm border border-rail object-cover"
+                        class="max-h-[26rem] w-full rounded-[1.5rem] border border-rail object-cover shadow-xl shadow-ink/5"
                     />
                 )
             }

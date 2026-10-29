@@ -20,7 +20,7 @@ const posts = (await getCollection("blog")).sort(
             title="Blog"
             tagline="A few posts written by me on different interests. My promise: none of the following writing was written by Gen AI."
         />
-        <ul>
+        <ul class="space-y-1">
             {posts.map((post) => <EntryRow entry={post} base="blog" />)}
         </ul>
     </section>

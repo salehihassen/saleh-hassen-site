@@ -13,10 +13,10 @@ const { entry, base } = Astro.props;
 const { data, id } = entry;
 ---
 
-<li class="border-t border-rail last:border-b">
+<li class="reveal">
     <a
         href={`/${base}/${id}`}
-        class="group grid grid-cols-[auto_1fr] items-start gap-x-4 gap-y-3 px-2 py-6 transition-colors duration-200 hover:bg-surface sm:gap-x-6 sm:px-4 md:grid-cols-[5.5rem_1fr_auto] md:items-center"
+        class="spotlight group -mx-2 grid grid-cols-[auto_1fr] items-start gap-x-4 gap-y-3 rounded-[var(--radius-card)] border border-transparent px-3 py-5 transition duration-300 ease-out-soft hover:border-rail hover:bg-surface/70 sm:-mx-4 sm:gap-x-6 sm:px-4 md:grid-cols-[5.5rem_1fr_auto] md:items-center"
     >
         <img
             src={data.img.src}
@@ -25,7 +25,7 @@ const { data, id } = entry;
             alt={data.img_alt || ""}
             loading="lazy"
             decoding="async"
-            class="aspect-[5/4] w-14 rounded-lg sm:rounded-xl border border-rail object-cover opacity-80 saturate-[0.65] transition duration-300 group-hover:opacity-100 group-hover:saturate-100 sm:w-[5.5rem]"
+            class="aspect-[5/4] w-14 rounded-xl border border-rail object-cover opacity-85 saturate-[0.7] transition duration-500 ease-out-soft group-hover:scale-[1.04] group-hover:opacity-100 group-hover:saturate-100 sm:w-[5.5rem]"
         />
 
         <div class="min-w-0 space-y-1.5">
@@ -43,7 +43,7 @@ const { data, id } = entry;
         </div>
 
         <div
-            class="col-span-2 flex items-center gap-3 font-mono text-meta uppercase tracking-[0.14em] text-faint md:col-span-1 md:justify-end"
+            class="col-span-2 flex items-center gap-3 font-mono text-meta text-faint tabular-nums md:col-span-1 md:justify-end"
         >
             <time datetime={data.publishDate.toISOString()}>
                 {formatDate(data.publishDate)}
@@ -51,7 +51,7 @@ const { data, id } = entry;
             <Icon
                 icon="arrow-right"
                 size="1.1rem"
-                class="text-accent transition-transform duration-200 group-hover:translate-x-1"
+                class="text-accent opacity-60 transition duration-300 ease-out-soft group-hover:translate-x-1 group-hover:opacity-100"
             />
         </div>
     </a>

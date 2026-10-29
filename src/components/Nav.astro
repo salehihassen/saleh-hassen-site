@@ -36,14 +36,12 @@ const isCurrentPage = (href: string) => {
 };
 
 const linkClass =
-    "relative block py-1 font-mono text-meta uppercase tracking-[0.14em] text-muted transition-colors duration-200 hover:text-ink after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-left after:scale-x-0 after:bg-accent after:transition-transform after:duration-200 hover:after:scale-x-100 aria-[current=page]:text-ink aria-[current=page]:after:scale-x-100";
+    "block rounded-full px-3.5 py-1.5 text-[0.92rem] font-medium text-muted transition-colors duration-200 hover:text-ink aria-[current=page]:bg-accent-soft aria-[current=page]:text-accent";
 ---
 
-<header
-    class="sticky top-0 z-50 border-b border-rail bg-page/85 backdrop-blur-md"
->
+<header class="sticky top-0 z-50 px-3 pt-3 sm:px-6">
     <nav
-        class="mx-auto flex w-full max-w-5xl items-center justify-between gap-4 px-6 py-4"
+        class="relative mx-auto flex w-full max-w-5xl items-center justify-between gap-4 rounded-full border border-rail bg-page/75 py-2 pl-5 pr-2 shadow-sm shadow-ink/5 backdrop-blur-xl"
         aria-label="Main"
     >
         <a
@@ -58,11 +56,11 @@ const linkClass =
             Saleh Hassen
         </a>
 
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-1.5">
             <!-- Shown by default so the menu still works without JS; the custom
                  element below hides it and takes over on small screens. -->
             <div id="menu-content" class="contents">
-                <ul class="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-7">
+                <ul class="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-0.5">
                     {
                         textLinks.map(({ label, href }) => (
                             <li>
@@ -84,12 +82,12 @@ const linkClass =
             <span aria-hidden="true" class="hidden h-4 w-px bg-rail sm:block"
             ></span>
 
-            <div class="hidden items-center gap-1 sm:flex">
+            <div class="hidden items-center sm:flex">
                 {
                     iconLinks.map(({ href, icon, label }) => (
                         <a
                             href={href}
-                            class="p-1.5 text-faint transition-colors duration-200 hover:text-accent"
+                            class="rounded-full p-2 text-faint transition-colors duration-200 hover:bg-accent-soft hover:text-accent"
                         >
                             <span class="sr-only">{label}</span>
                             <Icon icon={icon} size="1.05rem" />
@@ -103,7 +101,7 @@ const linkClass =
             <menu-button class="sm:hidden">
                 <template>
                     <button
-                        class="flex items-center rounded-sm border border-rail p-1.5 text-muted transition-colors duration-200 hover:text-ink"
+                        class="flex items-center rounded-full p-2 text-muted transition-colors duration-200 hover:bg-accent-soft hover:text-ink"
                         aria-expanded="false"
                         aria-controls="menu-content"
                     >
@@ -131,7 +129,7 @@ const linkClass =
             const setExpanded = (expand: boolean) => {
                 btn.setAttribute("aria-expanded", expand ? "true" : "false");
                 menu.className = expand
-                    ? "absolute inset-x-0 top-full border-b border-rail bg-page px-6 py-4 shadow-lg sm:contents"
+                    ? "absolute inset-x-0 top-full mt-2 rounded-3xl border border-rail bg-page p-3 shadow-lg sm:contents"
                     : "hidden sm:contents";
             };
 

@@ -20,7 +20,7 @@ const projects = (await getCollection("work")).sort(
             title="My Work"
             tagline="See my most recent projects below to get an idea of my past experience."
         />
-        <ul>
+        <ul class="space-y-1">
             {projects.map((project) => <EntryRow entry={project} base="work" />)}
         </ul>
     </section>
