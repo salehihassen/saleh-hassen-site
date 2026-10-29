@@ -8,14 +8,14 @@ interface Props {
 const { tone = "accent", class: className = "" } = Astro.props;
 
 const tones = {
-    accent: "border-accent/35 bg-accent-soft text-accent",
-    signal: "border-signal/35 bg-signal-soft text-signal",
+    accent: "border-accent/20 bg-accent-soft/70 text-accent",
+    signal: "border-signal/25 bg-signal-soft/70 text-signal",
 };
 ---
 
 <span
     class:list={[
-        "inline-flex items-center gap-1.5 whitespace-nowrap rounded-xs border px-2 py-1 font-mono text-meta uppercase tracking-[0.14em]",
+        "inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border px-2.5 py-0.5 text-[0.8rem] font-medium leading-6",
         tones[tone],
         className,
     ]}

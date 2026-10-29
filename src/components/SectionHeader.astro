@@ -14,7 +14,7 @@ const { eyebrow, title, tagline, href, linkLabel } = Astro.props;
 ---
 
 <div
-    class="flex flex-wrap items-end justify-between gap-x-6 gap-y-3 border-b border-rail pb-4"
+    class="flex flex-wrap items-end justify-between gap-x-6 gap-y-3 pb-2"
 >
     <div class="space-y-2">
         {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
@@ -25,7 +25,7 @@ const { eyebrow, title, tagline, href, linkLabel } = Astro.props;
         href && (
             <a
                 href={href}
-                class="group inline-flex items-center gap-2 pb-1 font-mono text-meta uppercase tracking-[0.14em] text-accent"
+                class="group inline-flex items-center gap-1.5 rounded-full border border-rail bg-surface px-3.5 py-1.5 text-sm font-medium text-ink transition-colors duration-200 hover:border-accent/50 hover:text-accent"
             >
                 {linkLabel}
                 <Icon

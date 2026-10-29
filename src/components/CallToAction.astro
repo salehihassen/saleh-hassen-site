@@ -7,15 +7,15 @@ interface Props {
 const { href, variant = "solid" } = Astro.props;
 
 const variants = {
-    solid: "border-accent bg-accent text-page hover:bg-transparent hover:text-accent",
-    quiet: "border-rail text-ink hover:border-accent hover:text-accent",
+    solid: "border-accent bg-accent text-page shadow-lg shadow-accent/20 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-accent/25",
+    quiet: "border-rail bg-surface text-ink hover:border-accent/50 hover:text-accent",
 };
 ---
 
 <a
     href={href}
     class:list={[
-        "inline-flex items-center justify-center gap-2 rounded-sm border px-5 py-2.5 font-mono text-meta uppercase tracking-[0.14em] transition-colors duration-200",
+        "shine relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full border px-5 py-2.5 text-[0.95rem] font-medium transition duration-300 ease-out-soft",
         variants[variant],
     ]}
 >

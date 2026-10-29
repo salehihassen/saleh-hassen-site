@@ -61,14 +61,16 @@ const posts = (await getCollection("blog"))
                     width={portrait.width}
                     height={portrait.height}
                     src={portrait.src}
-                    class="aspect-[4/5] w-full rounded-[1.5rem] object-cover object-[center_30%] shadow-xl shadow-ink/10 sm:rounded-[2.5rem] lg:rounded-[4.5rem] dark:shadow-black/40"
+                    class="aspect-[4/5] w-full rounded-[1.5rem] object-cover object-[center_30%] shadow-2xl shadow-accent/15 ring-1 ring-rail ring-offset-8 ring-offset-page sm:rounded-[2.5rem] lg:rounded-[3.5rem] dark:shadow-black/40"
                 />
             </div>
         </div>
     </section>
 
-    <div class="border-y border-rail bg-surface">
-        <div class="mx-auto w-full max-w-5xl px-6 py-16 sm:py-20">
+    <div class="mx-auto w-full max-w-5xl px-6">
+        <div
+            class="rounded-[1.75rem] border border-rail bg-surface/80 px-8 py-12 backdrop-blur-sm sm:px-12 sm:py-14"
+        >
             <Skills />
         </div>
     </div>
@@ -80,7 +82,7 @@ const posts = (await getCollection("blog"))
             href="/work/"
             linkLabel="View All"
         />
-        <ul>
+        <ul class="space-y-1">
             {
                 projects.map((project) => (
                     <EntryRow entry={project} base="work" />
@@ -91,7 +93,7 @@ const posts = (await getCollection("blog"))
 
     <section class="mx-auto w-full max-w-5xl space-y-6 px-6 pb-20 sm:pb-24">
         <SectionHeader title="Blog" href="/blog/" linkLabel="View All" />
-        <ul>
+        <ul class="space-y-1">
             {posts.map((post) => <EntryRow entry={post} base="blog" />)}
         </ul>
     </section>

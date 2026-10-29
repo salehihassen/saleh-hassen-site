@@ -3,10 +3,14 @@ import CallToAction from "./CallToAction.astro";
 import Icon from "./Icon.astro";
 ---
 
-<aside class="border-y border-rail bg-surface">
+<aside class="reveal mx-auto w-full max-w-5xl px-6 pb-16">
     <div
-        class="mx-auto flex w-full max-w-5xl flex-col gap-6 px-6 py-14 sm:flex-row sm:items-center sm:justify-between"
+        class="relative flex flex-col gap-6 overflow-hidden rounded-[1.75rem] border border-rail bg-surface px-8 py-12 sm:flex-row sm:items-center sm:justify-between sm:px-12"
     >
+        <div
+            aria-hidden="true"
+            class="pointer-events-none absolute -right-24 -top-24 size-72 rounded-full bg-accent/10 blur-3xl"
+        ></div>
         <h2 class="text-display-sm max-w-[18ch]">
             Interested in working together?
         </h2>
