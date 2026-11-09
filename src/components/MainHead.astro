@@ -12,12 +12,17 @@ const {
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin);
+
+// HTTP development previews cannot serve upgraded HTTPS asset requests.
+// Keep the upgrade directive in the production build served behind Railway TLS.
+const contentSecurityPolicy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https://images.pexels.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'"
+    + (import.meta.env.PROD ? "; upgrade-insecure-requests" : "");
 ---
 
 <meta charset="UTF-8" />
 <meta
     http-equiv="Content-Security-Policy"
-    content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https://images.pexels.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"
+    content={contentSecurityPolicy}
 />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="generator" content={Astro.generator} />
