@@ -1,41 +1,94 @@
 ---
 import Icon from "./Icon.astro";
+
+const options = [
+    { value: "system", label: "System theme", icon: "monitor" },
+    { value: "light", label: "Light theme", icon: "sun" },
+    { value: "dark", label: "Dark theme", icon: "moon-stars" },
+] as const;
 ---
 
 <theme-toggle>
-    <button
-        type="button"
-        class="flex items-center rounded-full p-2 text-faint transition-colors duration-200 hover:bg-accent-soft hover:text-accent"
+    <div
+        role="radiogroup"
+        aria-label="Theme"
+        class="flex items-center gap-0.5 rounded-full border border-rail p-0.5"
     >
-        <span class="sr-only">Switch theme</span>
-        <span class="hidden dark:block"><Icon icon="sun" size="1.05rem" /></span>
-        <span class="block dark:hidden"
-            ><Icon icon="moon-stars" size="1.05rem" /></span
-        >
-    </button>
+        {
+            options.map(({ value, label, icon }) => (
+                <button
+                    type="button"
+                    role="radio"
+                    aria-checked={value === "system" ? "true" : "false"}
+                    tabindex={value === "system" ? "0" : "-1"}
+                    data-value={value}
+                    title={label}
+                    class="flex items-center rounded-full p-1.5 text-faint transition-colors duration-200 hover:text-accent aria-checked:bg-accent-soft aria-checked:text-accent"
+                >
+                    <span class="sr-only">{label}</span>
+                    <Icon icon={icon} size="0.95rem" />
+                </button>
+            ))
+        }
+    </div>
 </theme-toggle>
 
 <script>
+    // The inline script in MainHead.astro applies the theme. This pill only
+    // saves the visitor's choice and shows which one is active.
+    const KEY = "theme-pref";
+
     class ThemeToggle extends HTMLElement {
-        constructor() {
-            super();
+        buttons = [...this.querySelectorAll<HTMLButtonElement>("[role=radio]")];
 
-            const button = this.querySelector("button")!;
-
-            const setTheme = (dark: boolean) => {
-                document.documentElement.classList[dark ? "add" : "remove"](
-                    "theme-dark",
+        connectedCallback() {
+            this.buttons.forEach((button, i) => {
+                button.addEventListener("click", () =>
+                    this.choose(button.dataset.value!),
                 );
-                button.setAttribute("aria-pressed", String(dark));
-            };
+                button.addEventListener("keydown", (e) => {
+                    const step =
+                        e.key === "ArrowRight" || e.key === "ArrowDown"
+                            ? 1
+                            : e.key === "ArrowLeft" || e.key === "ArrowUp"
+                              ? -1
+                              : 0;
+                    if (!step) return;
+                    e.preventDefault();
+                    const next =
+                        this.buttons[
+                            (i + step + this.buttons.length) %
+                                this.buttons.length
+                        ];
+                    next.focus();
+                    this.choose(next.dataset.value!);
+                });
+            });
 
-            button.addEventListener("click", () => setTheme(!this.isDark()));
-            setTheme(this.isDark());
+            document.addEventListener("themechange", this.sync);
+            this.sync();
         }
 
-        isDark() {
-            return document.documentElement.classList.contains("theme-dark");
+        disconnectedCallback() {
+            document.removeEventListener("themechange", this.sync);
         }
+
+        choose(value: string) {
+            try {
+                if (value === "system") localStorage.removeItem(KEY);
+                else localStorage.setItem(KEY, value);
+            } catch {}
+            document.dispatchEvent(new CustomEvent("themeprefchange"));
+        }
+
+        sync = () => {
+            const pref = document.documentElement.dataset.themePref ?? "system";
+            for (const button of this.buttons) {
+                const on = button.dataset.value === pref;
+                button.setAttribute("aria-checked", String(on));
+                button.tabIndex = on ? 0 : -1;
+            }
+        };
     }
     customElements.define("theme-toggle", ThemeToggle);
 </script>

@@ -55,41 +55,42 @@ const contentSecurityPolicy = "default-src 'self'; script-src 'self' 'unsafe-inl
     rel="stylesheet"
 />
 <script is:inline>
-    const THEME_KEY = "theme";
+    // Theme preference: "light", "dark", or "system" (the default, stored as no
+    // key). Only the ThemeToggle pill writes it, so loading a page or a system
+    // theme change never pins a visitor to a theme.
+    (() => {
+        const KEY = "theme-pref";
+        const root = document.documentElement;
+        const media = window.matchMedia("(prefers-color-scheme: dark)");
 
-    const applyTheme = (theme) => {
-        document.documentElement.classList[
-            theme === "dark" ? "add" : "remove"
-        ]("theme-dark");
-    };
+        const read = () => {
+            try {
+                const value = localStorage.getItem(KEY);
+                return value === "light" || value === "dark" ? value : "system";
+            } catch {
+                return "system";
+            }
+        };
 
-    const stored =
-        typeof localStorage !== "undefined"
-            ? localStorage.getItem(THEME_KEY)
-            : null;
-    const media = window.matchMedia("(prefers-color-scheme: dark)");
+        const apply = () => {
+            const pref = read();
+            const dark = pref === "dark" || (pref === "system" && media.matches);
+            root.classList.toggle("theme-dark", dark);
+            root.dataset.themePref = pref;
+            document.dispatchEvent(new CustomEvent("themechange"));
+        };
 
-    applyTheme(stored ?? (media.matches ? "dark" : "light"));
+        try {
+            // The old "theme" key could be saved without a click, which pinned
+            // visitors to dark. Drop it so everyone starts on "system".
+            localStorage.removeItem("theme");
+        } catch {}
 
-    // Follow the system only while the visitor hasn't picked a theme themselves.
-    media.addEventListener("change", (e) => {
-        if (!localStorage.getItem(THEME_KEY)) {
-            applyTheme(e.matches ? "dark" : "light");
-        }
-    });
-
-    if (typeof localStorage !== "undefined") {
-        const observer = new MutationObserver(() => {
-            localStorage.setItem(
-                THEME_KEY,
-                document.documentElement.classList.contains("theme-dark")
-                    ? "dark"
-                    : "light",
-            );
+        apply();
+        media.addEventListener("change", apply); // only matters while on "system"
+        document.addEventListener("themeprefchange", apply); // from the pill
+        window.addEventListener("storage", (e) => {
+            if (e.key === KEY) apply(); // keep other open tabs in sync
         });
-        observer.observe(document.documentElement, {
-            attributes: true,
-            attributeFilter: ["class"],
-        });
-    }
+    })();
 </script>

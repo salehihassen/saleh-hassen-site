@@ -24,6 +24,20 @@ Railway builds the site with Railpack and serves `dist/` with Caddy. The `Caddyf
 - Pages and other files are sent with `no-cache`: browsers keep a copy but check for a newer one on each visit, so a deploy never leaves anyone on an old page that points at deleted CSS.
 - There's no fallback to `index.html`; missing pages and files return a real 404.
 
+## Ask me about templates
+
+The two consolidated entries use the same preview component and full-page layout
+as every other blog post and project:
+
+- `src/content/blog/ask-me-about.md` → `/blog/ask-me-about/`
+- `src/content/work/ask-me-about.md` → `/work/ask-me-about/`
+
+Replace the bracketed prompts in each file, including the preview `description`.
+Topic headings carry over from the former placeholders; HTML comments preserve
+those previews as reference. Duplicate or remove topic sections as needed. Adjust
+the date, tags, and image in frontmatter before publishing. The Astro site entry
+stays separate at `/blog/this-astro-site/`.
+
 # Credits & Attribution
 
 Thanks to [Astro](https://astro.build/) and the [Portfolio starter kit on Github](https://github.com/withastro/astro/tree/latest/examples/portfolio?on=github) for the starters, documentation, and the Astro framework.

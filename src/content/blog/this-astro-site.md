@@ -19,5 +19,22 @@ Changes I made:
 - Added tags to work/blog preview
 - Adjust Call to Actions to contact info I was comfortable providing publicly.
 
+## Tech stack
+
+<a href="/diagrams/tech-stack.png">
+  <picture>
+    <source srcset="/diagrams/tech-stack-dark.png" media="(prefers-color-scheme: dark)" />
+    <img src="/diagrams/tech-stack.png" alt="Tech stack: Markdown content, Astro components, Tailwind CSS and Lucide icons build with Astro into dist/. Code goes to GitHub, where Actions checks, builds and smoke-tests it, and Railway builds it with Railpack and serves it with Caddy." loading="lazy" />
+  </picture>
+</a>
+
+## How a visit reaches the site
+
+<a href="/diagrams/request-flow.png">
+  <picture>
+    <source srcset="/diagrams/request-flow-dark.png" media="(prefers-color-scheme: dark)" />
+    <img src="/diagrams/request-flow.png" alt="Request flow: the browser looks up salehh.dev, connects over HTTPS to Railway's edge proxy, which forwards to Caddy. Caddy serves pages with no-cache, hashed /_astro/ assets with a one-year immutable cache, and a real 404 for missing pages. Fonts load from Google Fonts." loading="lazy" />
+  </picture>
+</a>
 
 ## Stay Tuned
