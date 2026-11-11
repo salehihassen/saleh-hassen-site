@@ -1,10 +1,10 @@
 ---
-import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 
 import ContactCTA from "../components/ContactCTA.astro";
 import Icon from "../components/Icon.astro";
 import Pill from "../components/Pill.astro";
+import ThemedImage from "../components/ThemedImage.astro";
 import BaseLayout from "./BaseLayout.astro";
 import { formatDate } from "../utils/entry";
 
@@ -59,10 +59,13 @@ const { data } = entry;
         <div class="mx-auto w-full max-w-3xl space-y-10 px-6 pb-16 sm:pb-20">
             {
                 data.img && (
-                    <Image
-                        src={data.img}
+                    <ThemedImage
+                        light={data.img}
+                        dark={data.img_dark}
                         alt={data.img_alt || ""}
-                        class="max-h-[26rem] w-full rounded-[1.5rem] border border-rail object-cover shadow-xl shadow-ink/5"
+                        linked={false}
+                        loading="eager"
+                        imageClass={`max-h-[26rem] w-full rounded-[1.5rem] border border-rail ${data.img_fit === "contain" ? "object-contain bg-page" : "object-cover"} shadow-xl shadow-ink/5`}
                     />
                 )
             }

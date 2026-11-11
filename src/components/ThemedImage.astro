@@ -1,0 +1,36 @@
+---
+// An image with an optional dark variant. The `light-only` and
+// `dark-only` rules in global.css hide whichever doesn't match the site theme
+// (the `theme-dark` class on <html>), so it follows the theme picker, not just
+// the OS. Content images link to the original; previews disable that link so
+// they can sit inside a post link. Heroes can opt into eager loading.
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+
+interface Props {
+    light: ImageMetadata;
+    dark?: ImageMetadata | undefined;
+    alt: string;
+    linked?: boolean;
+    class?: string;
+    imageClass?: string;
+    loading?: "lazy" | "eager";
+}
+
+const {
+    light, dark, alt, linked = true, class: className, imageClass,
+    loading = "lazy",
+} = Astro.props;
+const Wrapper = linked ? "a" : "span";
+---
+
+<figure class={className}>
+    <Wrapper class:list={["block", { "light-only": !!dark }]} href={linked ? light.src : undefined}>
+        <Image src={light} {alt} class={imageClass} {loading} />
+    </Wrapper>
+    {dark && (
+        <Wrapper class="dark-only block" href={linked ? dark.src : undefined}>
+            <Image src={dark} {alt} class={imageClass} {loading} />
+        </Wrapper>
+    )}
+</figure>

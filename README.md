@@ -24,6 +24,23 @@ Railway builds the site with Railpack and serves `dist/` with Caddy. The `Caddyf
 - Pages and other files are sent with `no-cache`: browsers keep a copy but check for a newer one on each visit, so a deploy never leaves anyone on an old page that points at deleted CSS.
 - There's no fallback to `index.html`; missing pages and files return a real 404.
 
+The Astro site post's build, GitHub Actions, and Railway diagrams have light and
+dark PNG variants in `src/resources/diagrams/`, prefixed `saleh-hassen-site-`.
+Edit and regenerate them and the request-flow diagram with
+`node scripts/generate-site-diagrams.mjs`.
+
+Blog and work entries can use a theme-aware preview and hero image. Keep `img`
+as the light/default image and optionally add `img_dark`. Use `img_fit: contain`
+for diagrams so they remain fully visible; the default is `cover` for photos.
+Both views use `ThemedImage` and follow the site's theme picker.
+
+```yaml
+img: ../../resources/diagrams/saleh-hassen-site-build.png
+img_dark: ../../resources/diagrams/saleh-hassen-site-build-dark.png
+img_fit: contain
+img_alt: Build diagram for saleh-hassen-site.
+```
+
 ## Ask me about templates
 
 The two consolidated entries use the same preview component and full-page layout

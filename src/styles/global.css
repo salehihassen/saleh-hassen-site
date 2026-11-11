@@ -412,3 +412,13 @@
         font-weight: 500;
     }
 }
+
+/*
+ * Light/dark variants (see ThemedImage.astro): show only the one matching the
+ * site theme. Keyed off `.theme-dark` rather than prefers-color-scheme so it
+ * follows the theme picker. Unlayered, so it beats `display` set in utilities.
+ */
+.theme-dark .light-only,
+html:not(.theme-dark) .dark-only {
+    display: none;
+}
