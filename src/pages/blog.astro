@@ -18,7 +18,7 @@ const posts = (await getCollection("blog")).sort(
     <section class="mx-auto w-full max-w-5xl space-y-10 px-6 pb-20 pt-14 sm:pt-20">
         <Hero
             title="Blog"
-            tagline="A few posts written by me on different interests. My promise: none of the following writing was written by Gen AI."
+	    tagline="A few posts written by me on different interests. Some diagrams and images may have been done or assisted with AI but the posts are written by me."
         />
         <ul class="space-y-1">
             {posts.map((post) => <EntryRow entry={post} base="blog" />)}

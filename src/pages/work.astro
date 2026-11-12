@@ -18,7 +18,7 @@ const projects = (await getCollection("work")).sort(
     <section class="mx-auto w-full max-w-5xl space-y-10 px-6 pb-20 pt-14 sm:pt-20">
         <Hero
             title="My Work"
-            tagline="See my most recent projects below to get an idea of my past experience."
+            tagline="See my most recent projects below to get an idea of my past experience. Some diagrams and images may have been done or assisted with AI but the posts are written by me."
         />
         <ul class="space-y-1">
             {projects.map((project) => <EntryRow entry={project} base="work" />)}

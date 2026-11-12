@@ -1,6 +1,6 @@
 ---
 title: This site
-publishDate: 2026-05-30 00:00:00
+publishDate: 2026-11-10 00:00:00
 img: ../../resources/diagrams/saleh-hassen-site-build.png
 img_dark: ../../resources/diagrams/saleh-hassen-site-build-dark.png
 img_fit: contain
@@ -26,22 +26,22 @@ import requestFlowDark from "../../resources/diagrams/request-flow-dark.png";
 This website is based off the Astro portfolio example of [Jeanine White](https://astro-portfolio.birki.io/).
 
 Changes I made:
-- I applied my own color theme 
-- Modified default theme behavior to match system theme (but respect user override of toggled theme)
-- Added tags to work/blog preview
+- Removed much of the color scheme and background of the original, then used Opus 5.5 and the frontend design skill to adjust styling.
+- Modified default theme behavior to create three theme options: match system theme, light mode, and dark mode.
+- Added tags to work/blog preview.
 - Adjust Call to Actions to contact info I was comfortable providing publicly.
 
 ## Tech stack
 
-### saleh-hassen-site — Build
+### Build
 
 <ThemedImage light={build} dark={buildDark} alt="saleh-hassen-site build: Markdown and MDX content, Astro pages and components, Tailwind CSS and Lucide icons are built with npm run build into dist/, containing HTML and hashed assets." />
 
-### saleh-hassen-site — GitHub Actions
+### GitHub Actions
 
 <ThemedImage light={githubActions} dark={githubActionsDark} alt="saleh-hassen-site GitHub Actions: pushes to main, pull requests, merge queues and manual runs trigger checks, builds and page smoke tests alongside a Git history secrets scan. Pull requests also receive a dependency review." />
 
-### saleh-hassen-site — Railway
+### Railway
 
 <ThemedImage light={railway} dark={railwayDark} alt="saleh-hassen-site Railway: the main branch is built with Railpack into dist/. Caddy serves the static files with custom caching and compression, behind Railway's HTTPS edge proxy." />
 
@@ -49,4 +49,3 @@ Changes I made:
 
 <ThemedImage light={requestFlow} dark={requestFlowDark} alt="Request flow: the browser looks up salehh.dev, connects over HTTPS to Railway's edge proxy, which forwards to Caddy. Caddy serves pages with no-cache, hashed /_astro/ assets with a one-year immutable cache, and a real 404 for missing pages." />
 
-## Stay Tuned
