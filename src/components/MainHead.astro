@@ -72,8 +72,9 @@ const contentSecurityPolicy = "default-src 'self'; script-src 'self' 'unsafe-inl
             }
         };
 
+        let pref = read();
+
         const apply = () => {
-            const pref = read();
             const dark = pref === "dark" || (pref === "system" && media.matches);
             root.classList.toggle("theme-dark", dark);
             root.dataset.themePref = pref;
@@ -88,9 +89,17 @@ const contentSecurityPolicy = "default-src 'self'; script-src 'self' 'unsafe-inl
 
         apply();
         media.addEventListener("change", apply); // only matters while on "system"
-        document.addEventListener("themeprefchange", apply); // from the pill
+        document.addEventListener("themeprefchange", (event) => {
+            const value = event.detail;
+            if (value !== "light" && value !== "dark" && value !== "system") return;
+            pref = value; // Keep the choice in memory when storage is blocked.
+            apply();
+        });
         window.addEventListener("storage", (e) => {
-            if (e.key === KEY) apply(); // keep other open tabs in sync
+            if (e.key === KEY || e.key === null) {
+                pref = read();
+                apply(); // Keep other tabs in sync, including storage.clear().
+            }
         });
     })();
 </script>

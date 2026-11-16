@@ -22,6 +22,12 @@
 
 	respond /health 200
 
+	# Keep links to the former placeholder posts working after consolidation.
+	@previousBlog path_regexp ^/blog/using-nixos/?$
+	redir @previousBlog /blog/ask-me-about/ 308
+	@previousWork path_regexp ^/work/(personal-network|google/(search-features|prototype-ai-evals)|two-six/(crypto-prototype|network-prototype))/?$
+	redir @previousWork /work/ask-me-about/ 308
+
 	header {
 		X-Content-Type-Options "nosniff"
 		-Server

@@ -78,7 +78,7 @@ const options = [
                 if (value === "system") localStorage.removeItem(KEY);
                 else localStorage.setItem(KEY, value);
             } catch {}
-            document.dispatchEvent(new CustomEvent("themeprefchange"));
+            document.dispatchEvent(new CustomEvent("themeprefchange", { detail: value }));
         }
 
         sync = () => {

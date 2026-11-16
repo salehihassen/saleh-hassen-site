@@ -6,6 +6,7 @@
     "dev": "astro dev",
     "dev2go": "astro dev --host 0.0.0.0",
     "check": "astro check",
+    "test": "node --test scripts/theme.test.mjs",
     "build": "astro build",
     "preview": "astro preview",
     "preview2go": "astro preview --host 0.0.0.0",

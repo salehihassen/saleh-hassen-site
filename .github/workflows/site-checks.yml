@@ -35,6 +35,9 @@ jobs:
       - name: Check Astro and TypeScript
         run: npm run check
 
+      - name: Test theme preferences
+        run: npm test
+
       - name: Build production site
         run: npm run build
 
@@ -45,7 +48,7 @@ jobs:
           preview_pid=$!
           trap 'kill "$preview_pid" 2>/dev/null || true' EXIT
 
-          for path in / /about/ /blog/ /work/; do
+          for path in / /about/ /blog/ /work/ /blog/ask-me-about/ /blog/this-astro-site/ /work/ask-me-about/; do
             curl --fail --silent --show-error \
               --retry 10 --retry-connrefused --retry-delay 1 \
               "http://127.0.0.1:4321${path}" > /dev/null
