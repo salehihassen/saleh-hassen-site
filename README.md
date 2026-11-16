@@ -6,6 +6,8 @@ Hi, welcome to my Astro site repo. The site is a static site that I host on Rail
 
 All commands are run from the root of the project, from a terminal:
 
+Use Node.js 24, matching CI and the production build's package engine setting.
+
 | Command                   | Action                                           |
 | :------------------------ | :----------------------------------------------- |
 | `npm install`             | Installs dependencies                            |
