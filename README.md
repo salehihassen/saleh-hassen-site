@@ -51,7 +51,7 @@ img_fit: contain
 img_alt: Build diagram for saleh-hassen-site.
 ```
 
-## Ask me about templates
+## Ask me about pages
 
 The two consolidated entries use the same preview component and full-page layout
 as every other blog post and project:
@@ -59,11 +59,10 @@ as every other blog post and project:
 - `src/content/blog/ask-me-about.mdx` → `/blog/ask-me-about/`
 - `src/content/work/ask-me-about.md` → `/work/ask-me-about/`
 
-Replace the bracketed prompts in each file, including the preview `description`.
-Topic headings carry over from the former placeholders; HTML comments preserve
-those previews as reference. Duplicate or remove topic sections as needed. Adjust
-the date, tags, and image in frontmatter before publishing. The Astro site entry
-stays separate at `/blog/this-astro-site/`.
+Edit the page content and preview `description` in these files. Duplicate or
+remove topic sections as needed, and adjust the date, tags, and image in
+frontmatter before publishing. The Astro site entry stays separate at
+`/blog/this-astro-site/`.
 
 # Credits & Attribution
 
