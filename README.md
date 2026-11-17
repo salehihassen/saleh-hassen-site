@@ -27,6 +27,11 @@ Railway builds the site with Railpack and serves `dist/` with Caddy. The `Caddyf
 - Pages and other files are sent with `no-cache`: browsers keep a copy but check for a newer one on each visit, so a deploy never leaves anyone on an old page that points at deleted CSS.
 - There's no fallback to `index.html`; missing pages and files return a real 404.
 
+Archivo and IBM Plex Mono are self-hosted WOFF2 assets under
+`src/resources/fonts/`. Their original licenses are in `public/fonts/`.
+The site loads its fonts from its own domain, with no Google Fonts requests;
+the content security policy permits only same-origin fonts.
+
 The Astro site post's build, GitHub Actions, and Railway diagrams have light and
 dark PNG variants in `src/resources/diagrams/`, prefixed `saleh-hassen-site-`.
 Edit and regenerate them and the request-flow diagram with

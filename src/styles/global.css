@@ -1,5 +1,30 @@
 @import "tailwindcss";
 
+/* Local WOFF2 assets are fingerprinted and served from this site's /_astro/. */
+@font-face {
+    font-family: "Archivo";
+    font-style: normal;
+    font-weight: 400 700;
+    font-display: swap;
+    src: url("../resources/fonts/archivo-latin-wght-normal.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("../resources/fonts/ibm-plex-mono-latin-400-normal.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url("../resources/fonts/ibm-plex-mono-latin-500-normal.woff2") format("woff2");
+}
+
 /* The theme toggle sets `.theme-dark` on <html>, so wire Tailwind's `dark:` to it. */
 @custom-variant dark (&:where(.theme-dark, .theme-dark *));
 

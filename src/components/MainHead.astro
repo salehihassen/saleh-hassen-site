@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import archivoFont from "../resources/fonts/archivo-latin-wght-normal.woff2?url";
 
 interface Props {
     title?: string | undefined;
@@ -15,7 +16,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin);
 
 // HTTP development previews cannot serve upgraded HTTPS asset requests.
 // Keep the upgrade directive in the production build served behind Railway TLS.
-const contentSecurityPolicy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https://images.pexels.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'"
+const contentSecurityPolicy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://images.pexels.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'"
     + (import.meta.env.PROD ? "; upgrade-insecure-requests" : "");
 ---
 
@@ -48,11 +49,12 @@ const contentSecurityPolicy = "default-src 'self'; script-src 'self' 'unsafe-inl
 />
 
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
-    href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..700&family=IBM+Plex+Mono:wght@400;500&display=swap"
-    rel="stylesheet"
+    rel="preload"
+    href={archivoFont}
+    as="font"
+    type="font/woff2"
+    crossorigin="anonymous"
 />
 <script is:inline>
     // Theme preference: "light", "dark", or "system" (the default, stored as no
