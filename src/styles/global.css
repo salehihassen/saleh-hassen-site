@@ -1,5 +1,30 @@
 @import "tailwindcss";
 
+/* Local WOFF2 assets are fingerprinted and served from this site's /_astro/. */
+@font-face {
+    font-family: "Archivo";
+    font-style: normal;
+    font-weight: 400 700;
+    font-display: swap;
+    src: url("../resources/fonts/archivo-latin-wght-normal.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("../resources/fonts/ibm-plex-mono-latin-400-normal.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url("../resources/fonts/ibm-plex-mono-latin-500-normal.woff2") format("woff2");
+}
+
 /* The theme toggle sets `.theme-dark` on <html>, so wire Tailwind's `dark:` to it. */
 @custom-variant dark (&:where(.theme-dark, .theme-dark *));
 
@@ -344,6 +369,23 @@
         margin-top: 0.4em;
     }
 
+    & details {
+        border: 1px solid var(--c-rail);
+        border-radius: var(--radius-card);
+        padding-inline: 1rem;
+    }
+
+    & summary {
+        cursor: pointer;
+        padding-block: 0.75rem;
+        color: var(--c-accent);
+        font-weight: 600;
+    }
+
+    & details > :not(summary) {
+        margin-bottom: 1rem;
+    }
+
     & blockquote {
         border-inline-start: 2px solid var(--c-accent);
         padding-inline-start: 1.25rem;
@@ -411,4 +453,14 @@
         color: var(--c-faint);
         font-weight: 500;
     }
+}
+
+/*
+ * Light/dark variants (see ThemedImage.astro): show only the one matching the
+ * site theme. Keyed off `.theme-dark` rather than prefers-color-scheme so it
+ * follows the theme picker. Unlayered, so it beats `display` set in utilities.
+ */
+.theme-dark .light-only,
+html:not(.theme-dark) .dark-only {
+    display: none;
 }

@@ -6,11 +6,14 @@ Hi, welcome to my Astro site repo. The site is a static site that I host on Rail
 
 All commands are run from the root of the project, from a terminal:
 
+Use Node.js 24, matching CI and the production build's package engine setting.
+
 | Command                   | Action                                           |
 | :------------------------ | :----------------------------------------------- |
 | `npm install`             | Installs dependencies                            |
 | `npm run dev`             | Starts local dev server at `localhost:4321`      |
 | `npm run check`           | Checks Astro files, content, and TypeScript      |
+| `npm test`                | Tests theme selection and storage behavior       |
 | `npm run build`           | Build your production site to `./dist/`          |
 | `npm run preview`         | Preview your build locally, before deploying     |
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
@@ -23,6 +26,43 @@ Railway builds the site with Railpack and serves `dist/` with Caddy. The `Caddyf
 - `/_astro/*` files have a content hash in their name, so they're cached for a year (`immutable`).
 - Pages and other files are sent with `no-cache`: browsers keep a copy but check for a newer one on each visit, so a deploy never leaves anyone on an old page that points at deleted CSS.
 - There's no fallback to `index.html`; missing pages and files return a real 404.
+
+Archivo and IBM Plex Mono are self-hosted WOFF2 assets under
+`src/resources/fonts/`. Their original licenses are in `public/fonts/`.
+The site loads its fonts from its own domain, with no Google Fonts requests;
+the content security policy permits only same-origin fonts.
+
+The Astro site post's build, GitHub Actions, and Railway diagrams have light and
+dark PNG variants in `src/resources/diagrams/`, prefixed `saleh-hassen-site-`.
+Edit and regenerate them and the request-flow diagram with
+`node scripts/generate-site-diagrams.mjs`.
+
+Blog and work entries can use a theme-aware preview and hero image. Keep `img`
+as the light/default image and optionally add `img_dark`. Use `img_fit: contain`
+for diagrams so they remain fully visible; the default is `cover` for photos.
+Both views use `ThemedImage` and follow the site's theme picker.
+For component imports inside post content, use a `.mdx` file. Plain `.md`
+files support standard Markdown; the frontmatter image fields work in both.
+
+```yaml
+img: ../../resources/diagrams/saleh-hassen-site-build.png
+img_dark: ../../resources/diagrams/saleh-hassen-site-build-dark.png
+img_fit: contain
+img_alt: Build diagram for saleh-hassen-site.
+```
+
+## Ask me about pages
+
+The two consolidated entries use the same preview component and full-page layout
+as every other blog post and project:
+
+- `src/content/blog/ask-me-about.mdx` → `/blog/ask-me-about/`
+- `src/content/work/ask-me-about.md` → `/work/ask-me-about/`
+
+Edit the page content and preview `description` in these files. Duplicate or
+remove topic sections as needed, and adjust the date, tags, and image in
+frontmatter before publishing. The Astro site entry stays separate at
+`/blog/this-astro-site/`.
 
 # Credits & Attribution
 

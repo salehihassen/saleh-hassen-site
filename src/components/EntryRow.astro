@@ -2,6 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 import Icon from "./Icon.astro";
 import Pill from "./Pill.astro";
+import ThemedImage from "./ThemedImage.astro";
 import { formatDate } from "../utils/entry";
 
 interface Props {
@@ -18,14 +19,13 @@ const { data, id } = entry;
         href={`/${base}/${id}`}
         class="spotlight group -mx-2 grid grid-cols-[auto_1fr] items-start gap-x-4 gap-y-3 rounded-[var(--radius-card)] border border-transparent px-3 py-5 transition duration-300 ease-out-soft hover:border-rail hover:bg-surface/70 sm:-mx-4 sm:gap-x-6 sm:px-4 md:grid-cols-[5.5rem_1fr_auto] md:items-center"
     >
-        <img
-            src={data.img.src}
-            width={data.img.width}
-            height={data.img.height}
+        <ThemedImage
+            light={data.img}
+            dark={data.img_dark}
             alt={data.img_alt || ""}
-            loading="lazy"
-            decoding="async"
-            class="aspect-[5/4] w-14 rounded-xl border border-rail object-cover opacity-85 saturate-[0.7] transition duration-500 ease-out-soft group-hover:scale-[1.04] group-hover:opacity-100 group-hover:saturate-100 sm:w-[5.5rem]"
+            linked={false}
+            class="w-14 sm:w-[5.5rem]"
+            imageClass={`aspect-[5/4] w-full rounded-xl border border-rail ${data.img_fit === "contain" ? "object-contain bg-page" : "object-cover"} opacity-85 saturate-[0.7] transition duration-500 ease-out-soft group-hover:scale-[1.04] group-hover:opacity-100 group-hover:saturate-100`}
         />
 
         <div class="min-w-0 space-y-1.5">
