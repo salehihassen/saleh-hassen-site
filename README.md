@@ -41,6 +41,8 @@ Blog and work entries can use a theme-aware preview and hero image. Keep `img`
 as the light/default image and optionally add `img_dark`. Use `img_fit: contain`
 for diagrams so they remain fully visible; the default is `cover` for photos.
 Both views use `ThemedImage` and follow the site's theme picker.
+For component imports inside post content, use a `.mdx` file. Plain `.md`
+files support standard Markdown; the frontmatter image fields work in both.
 
 ```yaml
 img: ../../resources/diagrams/saleh-hassen-site-build.png
@@ -54,7 +56,7 @@ img_alt: Build diagram for saleh-hassen-site.
 The two consolidated entries use the same preview component and full-page layout
 as every other blog post and project:
 
-- `src/content/blog/ask-me-about.md` → `/blog/ask-me-about/`
+- `src/content/blog/ask-me-about.mdx` → `/blog/ask-me-about/`
 - `src/content/work/ask-me-about.md` → `/work/ask-me-about/`
 
 Replace the bracketed prompts in each file, including the preview `description`.

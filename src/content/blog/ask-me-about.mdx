@@ -1,0 +1,86 @@
+---
+title: Ask me about these topics
+publishDate: 2026-11-16 21:30:00
+img: ../../resources/stock-1.jpg
+img_alt: Abstract blue and pink ripples.
+description: "[Add a short preview of the topics you could write about.]"
+tags:
+  - Ask me about
+---
+
+import ThemedImage from "../../components/ThemedImage.astro";
+import nixos_light from "../../resources/blog/nixos/nixos-light.svg";
+import nixos_dark from "../../resources/blog/nixos/nixos-dark.svg";
+
+
+[Introduce the experiences you could write about and how reader interest will help you choose what to cover.]
+
+## Using NixOS
+
+<ThemedImage
+    light={nixos_light}
+    dark={nixos_dark}
+    alt="NixOS icon, 6 lambda symbols connected as a hexagon and snowflake."
+/>
+
+
+I've tried a few linux operating systems but in early 2026 I started trying out NixOS and I really liked how it used a declarative config system to manage the OS. In April 2026 I made it my main driver for my development laptop and have been operating on it since. I'm still getting used to it and I do rely on nix-ld as a workaround to run some binaries for global use on my system but overall I appreciate the setup. I heavily used Codex CLI and Claude Code to understand and modify my system. 
+
+Quick details about it:
+- NixOS w/ Flakes, Home Manager, and GNU Stow
+- Niri and Noctalia Shell for a nice tiling desktop experience
+- Still figuring out the split to make some components reusable on different machines
+- A few github repos as flake inputs
+- A few helper scripts
+  - snapshot work across windows and browser tabs
+  - screen record monitor / window
+  - toggle system theme
+  - local dication w/ Whisper v3 turbo and light text polishing w/ llama3.2:3b.
+- Favorite apps: Ghostty, Helium, ProtonVPN, t3code server.
+
+
+[See the repo for more info](https://github.com/salehihassen/my-nixos-setup)
+
+## Problem solvers will always be needed
+
+I really appreciate how today's LLMs are really great and capable in so many different workflows. Many models can handle performing arbitrary tasks as long as they are granted in their harness a CLI or MCP tools that enable the task to be done. It's crazy how from scraping the internet and various corpus of human made content you can create a model where thanks to next token prediction you can have it solve so many problems so well. I know AI writes better code than me and can perform those changes faster. 
+
+So are software engineers cooked? 
+
+I don't know the future but I strongly believe generative AI can augment Software Engineers and other roles to get more done. However from my past 5 years working in companies in the field, I have met efficient, capable software engineers. They can get a lot done as long as there is enough autonomy to meet their responsibilies, they can coordinate with stakeholders, they understand components of systems and how to integrate them together. 
+
+I've also worked on teams where I had to operate in dysfunction where it was a frequent occurrence I would have to re-do a ticket 3 times because the leadership would not clarify requirements until the last minute and blame me despite not offering the communication channels needed to deliver what they want on-time. Where you need to operate with an unwritten understanding of how your company goes about the day-to-day and how to not piss off leadership.
+
+Companies, enterprises, non-profits, and governments typically adopt technologies slowly, there's hesitation, there's bloat, and there's a ton of inefficiencies and if you're unlucky you'll operate in the worst parts of them and want to bang your head at a wall. AI adoption is also fairly immature and constantly shifting. 
+
+It's from these experiences I strongly believe the problem solvers who are willing to jump into the big picture and small details, collaborate with stakeholders, coordinates systems to get stuff done, and the need for most orgs to operate w/ individuals who take responsibility for their output, that problem solvers will not become obsolete because of an AI model, harness, or integrated tools. That the immature "AI software factory" still needs to be carefully designed, maintained, and improved. That problem solvers are the best equipped to understand what context is critical inputs for an AI workflow to streamline a system while getting it done with great quality. And when there is an outage for an AI model, that these problem solvers can find a way to keep their systems operational, even if degraded and at a lower scale. The analogy both Lauren Tan and Theo t3.gg use is that you need to care for your AI systems like a garden to have it continually grow in the right direction. It's because of this care that problem solvers will always be needed and why I know a good problem solver who can focus on the right problems will never be obsolete, especially not now. 
+
+
+## My AI workflows
+
+How I use AI on my day-to-day basis. I can go into more detail but here's the quick gist.
+
+- Research and Ideation: Chatgpt Live asking about information on the go. Create handoff plans (markdown or HTML) and sometimes create Kaneo tickets connected over Chatgpt Plugins.
+- Feedback: Get feedback on a design or a piece of work, primarily over Chatgpt app to mitigate usage of Chatgpt subscription usage.
+- Coding: t3code harness to interact with CLI harnesses (Codex, Claude Code) to kick off implementation and debugging work.
+- Review: Over t3code ask the agent in the thread to use another AI model family to review this change if I have spare usage.
+- My subscriptions: $20/mo claude pro, $20/mo chatgpt plus, $30/mo synthetic.new, $5/mo limited spend on OpenRouter and utilizing OpenRouter free models. Strongly considering pulling the trigger upgrading my OpenAI and Anthropic plan.
+<details>
+<summary>More about my setup</summary>
+
+- Inference proxy: Use CliProxyApi to make integrating LLM inference easier across my machines and harnesses. For Anthropic models I stick to only using my subscription's inference only with Claude code.
+- Observability: Redirect session traces from AI harnesses (Codex, Claude Code, CondenseIt, etc.) to Langfuse, ClickHouse, and MinIO w/ Prometheus to monitor metrics. 
+- News: For news about a topic I have a Chatgpt Project w/ a system prompt to create text to speech friendly output (no markdown, no tables, no code blocks) and then paste that response to ElevenReader to listen to the response with good audio reader UX. Using [Condenseit](https://github.com/wildlifechorus/condenseit) repo to create a news digest daily from news feeds. 
+- When I was job searching: I created a Chatgpt project w/ a system prompt describing everything I'm looking for and definining a scoring criteria and hard requirements w/ the evaluated score immediately given as the executive summaary. Every job posting I was considering was scanned with that rubric, sometimes before I read the JD myself, and occasionally asked Chatgpt to search for roles that met a certain scoring criteria or better.
+- Event scanning: Scheduled chatgpt thread every week to scan for events w/ my given prompt for fun, professional development, hackathons, and deals.
+- AI writing detection: Pangram and GPTZero Chrome extensions detecting AI written text to mitigate how often I read posts that were likely low effort from the poster. I read enough AI written text from my AI apps, unless you're the exception I don't want to read AI written text. Still seeking a solution for the mobile apps on my phone.
+- Usage bar monitoring: Home Assistant sub page dashboard polling usage information from either CliProxyApi or the usage provider directly.
+- Private Skills repo: A set of skills I keep private providing context and tools to guide an agent to do something in a way I prefer. Triggering the skill w/ auto invoke using the description frontmatter to tell an AI harness when it's appropriate to invoke that skill.
+
+</details>
+
+## Interested in a topic?
+
+[Add an invitation to reach out and mention the topic they'd like to hear about.]
+
+[Ask me on LinkedIn](https://www.linkedin.com/in/saleh-hassen/)

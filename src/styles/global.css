@@ -369,6 +369,23 @@
         margin-top: 0.4em;
     }
 
+    & details {
+        border: 1px solid var(--c-rail);
+        border-radius: var(--radius-card);
+        padding-inline: 1rem;
+    }
+
+    & summary {
+        cursor: pointer;
+        padding-block: 0.75rem;
+        color: var(--c-accent);
+        font-weight: 600;
+    }
+
+    & details > :not(summary) {
+        margin-bottom: 1rem;
+    }
+
     & blockquote {
         border-inline-start: 2px solid var(--c-accent);
         padding-inline-start: 1.25rem;
