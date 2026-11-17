@@ -2,7 +2,7 @@
 title: My Self hosting setup, May 2026
 publishDate: 2026-05-24T08:29:45-04:00
 img: ../../resources/shipping-containers.jpg
-img_alt: Soft pink and baby blue water ripples together in a subtle texture.
+img_alt: Illustration of colorful shipping containers stacked against a blue background.
 description: |
   What services I run on my machines and what I'll likely expand into.
 tags:
